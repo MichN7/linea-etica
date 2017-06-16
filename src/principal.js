@@ -5,6 +5,8 @@ import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import Reporte from './formReporte.js';
 import Seguimiento from './seguimiento.js';
 import Lista from './listaStatus.js';
+import ReporteVoz from './reporteVoz.js';
+
 class Principal extends Component {
   render() {
     return (
@@ -18,6 +20,9 @@ class Principal extends Component {
           <Route path="/seguimiento" component={Seguimiento}/>
           <Route path="/reporte_status" component={Lista}/>
           <Route path="/reporte" component={Reporte}/>
+          <Route path="/GrabarRepo" component={ReporteVoz}/>
+
+
           </div>
         </Router>
       </div>

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AutoComplete from 'material-ui/AutoComplete';
+import ReporteVoz from './reporteVoz.js';
+
 class Reporte extends Component {
   state = {
    dataSource: [],
@@ -20,6 +22,7 @@ class Reporte extends Component {
     return (
 
       <MuiThemeProvider>
+
       <div>
       <p>REPORTE DE CASO,
       en este espacio puede reportar la situación detectada de prácticas que van en contra de nuestros principios
@@ -39,6 +42,9 @@ class Reporte extends Component {
         />
 
 
+      </div>
+      <div>
+        <ReporteVoz/>
       </div>
       </MuiThemeProvider>
 
