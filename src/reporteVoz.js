@@ -7,6 +7,9 @@ import MicrophoneOff               from 'material-ui/svg-icons/av/stop';
 import sampleAudio                 from './sample_audio.webm';
 import ReactGA                     from 'react-ga';
 import { ReactMic } from 'react-mic';
+import ReactConfirmAlert, { confirmAlert } from 'react-confirm-alert'; // Import
+import './reporteVoz.css';
+
 
 
 
@@ -39,10 +42,24 @@ class ReporteVoz extends Component{
   }
 
   onStop= (blobObject) => {
+
     this.setState({
       blobURL : blobObject.blobURL
     })
   }
+  submit = () => {
+    confirmAlert({
+      title: 'Linea-Etica',                        // Title dialog
+      message: 'Estas seguro que quieres mandar este audio?',               // Message dialog
+      confirmLabel: 'Enviar',                           // Text button confirm
+      cancelLabel: 'Cancelar',                             // Text button cancel
+      onConfirm: () =>alert('subiendo audio'+this.state.blobURL),    
+      onCancel: () =>   this.setState({
+          record: false,
+          isRecording: false
+        }),      // Action after Cancel
+    })
+  };
 
   render(){
     const { isRecording } = this.state;
@@ -51,6 +68,11 @@ class ReporteVoz extends Component{
      <MuiThemeProvider>
        <div>
          <h2>Graba tu reporte</h2>
+         <p>1.-Menciona tu nombre y apellidos (opcional)</p>
+         <p>2.-Fecha y hora de lo ocurrido </p>
+         <p>3.-Personas involucradar (nombre,area,puesto)</p>
+         <p>4.-¿Se lo ha notificado a la Dirección?</p>
+         <p>5.-Describa lo ocurrido</p>
          <ReactMic
            className="oscilloscope"
            record={this.state.record}
@@ -80,7 +102,9 @@ class ReporteVoz extends Component{
          <br />
          <br />
          <br />
-         <p>As featured in the course <br /><a href="http://singlepageapplication.com">How to Write a Single Page Application</a></p>
+         <div className="buttonConfirm">
+       <button onClick={this.submit}>Enviar Audio</button>
+     </div>
        </div>
    </MuiThemeProvider>
 

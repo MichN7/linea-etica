@@ -3,6 +3,8 @@ import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AutoComplete from 'material-ui/AutoComplete';
 import ReporteVoz from './reporteVoz.js';
+import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
+
 
 class Reporte extends Component {
   state = {
@@ -24,6 +26,8 @@ class Reporte extends Component {
       <MuiThemeProvider>
 
       <div>
+      <li><Link to="/GrabarRepo">Grabar reporte</Link></li>
+
       <p>REPORTE DE CASO,
       en este espacio puede reportar la situación detectada de prácticas que van en contra de nuestros principios
        y valores.</p>
@@ -41,11 +45,8 @@ class Reporte extends Component {
           onUpdateInput={this.handleUpdateInput}
         />
 
+      </div>
 
-      </div>
-      <div>
-        <ReporteVoz/>
-      </div>
       </MuiThemeProvider>
 
     );
