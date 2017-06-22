@@ -1,0 +1,26 @@
+div#nuevo {
+  margin-left: 4%;
+  text-align: center;
+  margin-right: 4%;
+  margin-top: 5%;
+}
+
+div#nuevo a{
+  text-decoration: none;
+  color: #0EBFE9;
+}
+
+div#nuevo a:hover{
+  text-decoration: none;
+  color: #65909A;
+}
+
+div#nuevo li{
+  list-style: none;
+  text-align: center;
+}
+
+div#nuevo-descripcion{
+  text-align: left;
+  margin-left: 15%;
+}

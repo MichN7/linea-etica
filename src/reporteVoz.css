@@ -1,3 +1,4 @@
+
 .react-confirm-alert-blur {
   filter: url(#gaussian-blur);
   filter: blur(2px);
@@ -102,5 +103,22 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+div#grabar {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    font-family: roboto,sans-serif;
+}
+
+canvas.oscilloscope {
+    width: 20%;
+}
+
+@media (max-width: 700px) {
+  canvas.oscilloscope {
+      width: 75%;
   }
 }

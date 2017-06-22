@@ -10,8 +10,14 @@ import { ReactMic } from 'react-mic';
 import ReactConfirmAlert, { confirmAlert } from 'react-confirm-alert'; // Import
 import './reporteVoz.css';
 
+const styleRecord = {
+ color : 'blue',
+};
 
-
+const styleGrabacion = {
+  width: '100%',
+  height: '100%',
+}
 
 class ReporteVoz extends Component{
   constructor(props){
@@ -53,7 +59,7 @@ class ReporteVoz extends Component{
       message: 'Estas seguro que quieres mandar este audio?',               // Message dialog
       confirmLabel: 'Enviar',                           // Text button confirm
       cancelLabel: 'Cancelar',                             // Text button cancel
-      onConfirm: () =>alert('subiendo audio'+this.state.blobURL),    
+      onConfirm: () =>alert('subiendo audio'+this.state.blobURL),
       onCancel: () =>   this.setState({
           record: false,
           isRecording: false
@@ -66,7 +72,7 @@ class ReporteVoz extends Component{
 
     return(
      <MuiThemeProvider>
-       <div>
+       <div id='grabar'>
          <h2>Graba tu reporte</h2>
          <p>1.-Menciona tu nombre y apellidos (opcional)</p>
          <p>2.-Fecha y hora de lo ocurrido </p>
@@ -89,6 +95,7 @@ class ReporteVoz extends Component{
            className="btn"
            secondary={true}
            disabled={isRecording}
+           style={styleRecord}
            onClick={this.startRecording}>
            <MicrophoneOn />
          </FloatingActionButton>

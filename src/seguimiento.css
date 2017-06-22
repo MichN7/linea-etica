@@ -1,0 +1,24 @@
+div#seguimiento {
+    text-align: center;
+    margin-top: 15%;
+}
+
+div#seguimiento-link {
+    margin-top: 10%;
+}
+
+#seguimiento p{
+  font-weight: bold;
+  font-family: monospace, sans-serif;
+  font-size: 1.2em;
+}
+
+#seguimiento a{
+  text-decoration: none;
+  color: #0EBFE9;
+}
+
+#seguimiento :hover{
+  text-decoration: none;
+  color: #65909A;
+}
