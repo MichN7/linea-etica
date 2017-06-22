@@ -16,7 +16,6 @@ class Reporte extends Component {
   this.state = {
     dataLugar: [],
     dataPersonas:[],
-    open:false,
     id:'0'
  };
 
@@ -25,20 +24,23 @@ class Reporte extends Component {
  componentWillMount(){
    var idReporte=id.generate();
    this.setState({
-     id:idReporte
+     id:idReporte,
+     open:false
    });
  }
  subirDatos =()=>{
 
-  var refDB=ref.child("reportesEscritos");
-    var refSubir=refDB.push();
-    refSubir.set({
+  var refDB=ref.child("reportes/" +`${this.state.id}`);
+    refDB.set({
       caso:`${this.state.caso}`,
       lugar:`${this.state.dataLugar}`,
       persona:`${this.state.dataPersonas}`,
-      id:`${this.state.id}`
-    });
-    this.handleOpen();
+    }),
+
+
+  this.setState({
+    open: true
+  });
 
 };
 
@@ -67,9 +69,7 @@ handleChangeNotas = (event) => {
    });
 
  };
- handleOpen = () => {
-     this.setState({open: true});
-   };
+
  handleClose = () => {
      this.setState({open: false});
    };
@@ -89,6 +89,14 @@ handleChangeNotas = (event) => {
       <form onSubmit={this.subirDatos}>
       <MuiThemeProvider>
       <div>
+      <Dialog
+         title="Dialog With Actions"
+         actions={actions}
+        onRequestClose={this.handleClose}
+         open={this.state.open}
+       >
+       El reporte fue enviado, para darle seguimiento conserva este código : {this.state.id}
+     </Dialog>
       <li><Link to="/GrabarRepo">Grabar reporte</Link></li>
       <p>REPORTE DE CASO,
       en este espacio puede reportar la situación detectada de prácticas que van en contra de nuestros principios
@@ -117,15 +125,8 @@ handleChangeNotas = (event) => {
         type="submit"
         secondary={true}
       />
-      <Dialog
-         title="Dialog With Actions"
-         actions={actions}
-         modal={false}
-         open={this.state.open}
 
-       >
-         El reporte fue enviado, para darle seguimiento conserva este código : {this.state.id}
-       </Dialog>
+
       </div>
 
       </MuiThemeProvider>

@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AutoComplete from 'material-ui/AutoComplete';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import { ref } from './const.js'
 const style = {
   margin: 12,
 };
@@ -16,14 +16,18 @@ class Seguimiento extends Component{
  handleUpdateInput = (value) => {
    this.setState({
      dataSource: [
-       value,
-       value + value,
-       value + value + value,
+       value
      ],
    });
  };
 revision=()=>{
-  
+  var nip=this.state.dataSource;
+  var refDB=ref.child("reportes/"+ nip);
+  refDB.on('value', snapshot=>{
+    var reporte=snapshot.val().lugar;
+
+  });
+  alert(this.reporte);
 }
 render(){
   return(
