@@ -12,7 +12,8 @@
     "react-dom": "^15.5.4",
     "react-ga": "^2.2.0",
     "react-mic": "^7.0.2",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "shortid": "^2.2.8"
   },
   "scripts": {
     "start": "react-scripts start",

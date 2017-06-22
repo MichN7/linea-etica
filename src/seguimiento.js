@@ -22,8 +22,12 @@ class Seguimiento extends Component{
      ],
    });
  };
+revision=()=>{
+  
+}
 render(){
   return(
+    <form onSubmit={this.revision}>
     <MuiThemeProvider>
     <div>
     <p>Coloca el ID de reporte</p>
@@ -33,17 +37,15 @@ render(){
         onUpdateInput={this.handleUpdateInput}
       />
       <RaisedButton
-      href="/reporte_status"
-      target="_self"
       label=" Aceptar "
+      type="onSubmit"
       secondary={true}
-
     />
     <a><p>¿Nuevo reporte?</p></a>
 
     </div>
     </MuiThemeProvider>
-
+    </form>
   );
 }
 }
