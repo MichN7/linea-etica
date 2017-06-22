@@ -5,6 +5,7 @@ import AutoComplete from 'material-ui/AutoComplete';
 import RaisedButton from 'material-ui/RaisedButton';
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import './seguimiento.css';
+import { ref } from './const.js'
 
 const style = {
   margin: 12,
@@ -18,14 +19,22 @@ class Seguimiento extends Component{
  handleUpdateInput = (value) => {
    this.setState({
      dataSource: [
-       value,
-       value + value,
-       value + value + value,
+       value
      ],
    });
  };
+revision=()=>{
+  var nip=this.state.dataSource;
+  var refDB=ref.child("reportes/"+ nip);
+  refDB.on('value', snapshot=>{
+    var reporte=snapshot.val().lugar;
+
+  });
+  alert(this.reporte);
+}
 render(){
   return(
+    <form onSubmit={this.revision}>
     <MuiThemeProvider>
       <div id='seguimiento'>
         <p>Escribe el ID de reporte</p>
@@ -45,8 +54,23 @@ render(){
             <Link to="/reporte" >¿Nuevo reporte?</Link>
           </div>
       </div>
-    </MuiThemeProvider>
+    <div>
+    <p>Coloca el ID de reporte</p>
+    <AutoComplete
+        hintText="ejemplo 4135"
+        dataSource={this.state.dataSource}
+        onUpdateInput={this.handleUpdateInput}
+      />
+      <RaisedButton
+      label=" Aceptar "
+      type="onSubmit"
+      secondary={true}
+    />
+    <a><p>¿Nuevo reporte?</p></a>
 
+    </div>
+    </MuiThemeProvider>
+    </form>
   );
 }
 }
