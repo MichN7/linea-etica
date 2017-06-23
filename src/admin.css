@@ -1,0 +1,17 @@
+div#admin-form {
+  text-align: center;
+  margin-top: 13%;
+  font-size: 1.5em;
+}
+
+div#admin-button{
+  margin-top: 3%;
+}
+
+div#admin-correo{
+  color: #FF4081;
+}
+
+div#admin-contrasena{
+    color: #0EBFE9;
+}

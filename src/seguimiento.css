@@ -4,24 +4,30 @@ div#seguimiento {
 }
 
 div#seguimiento-link {
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
-#seguimiento p{
-  font-weight: bold;
-  font-family: monospace, sans-serif;
-  font-size: 1.2em;
+#seguimiento p {
+    font-weight: bold;
+    font-family: Roboto, sans-serif;
+    font-size: 2.4em;
+    color: #0EBFE9;
 }
 
 #seguimiento a{
-  text-decoration: none;
+  text-decoration: underline;
   color: #0EBFE9;
 }
 
-#seguimiento :hover{
-  text-decoration: none;
+#seguimiento a:hover{
+  text-decoration: underline;
   color: #65909A;
 }
+
+#seguimiento p span {
+    color: #FF4081;
+}
+
 
 @media (max-width: 800px) {
   div#seguimiento {
@@ -40,6 +46,6 @@ div#seguimiento-link {
 @media (max-width: 400px) {
   div#seguimiento {
       text-align: center;
-      margin-top: 60%;
+      margin-top: 50%;
   }
 }

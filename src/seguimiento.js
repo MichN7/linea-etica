@@ -38,7 +38,7 @@ render(){
     <MuiThemeProvider>
 
     <div id='seguimiento'>
-    <p>Coloca el ID de reporte</p>
+    <p>Coloca el <span>ID </span> de reporte</p>
     <AutoComplete
         hintText="Ex. 709237"
         dataSource={this.state.dataSource}

@@ -6,6 +6,28 @@ import {Link, Route} from 'react-router-dom'
 import Seguimiento from './seguimiento.js';
 import "./ActionBar.css"
 
+const styleItemsTop = {
+ width:'100%',
+ whiteSpace: 'none',
+ lineHeight: '%1',
+ paddingTop:'10%',
+ paddingBottom:'10%',
+};
+
+const styleItemsSecond = {
+ width:'100%',
+ whiteSpace: 'none',
+ lineHeight: '1%',
+ paddingTop:22,
+};
+
+const styleItemsThird = {
+ width:'100%',
+ whiteSpace: 'none',
+ lineHeight: '1%',
+ paddingTop:22,
+};
+
 class AppBarExampleIcon extends React.Component {
 
   constructor(props) {
@@ -34,10 +56,13 @@ class AppBarExampleIcon extends React.Component {
             onRequestChange={(open) => this.setState({open})}
           >
             <Link to="/seguimiento">
-              <MenuItem onTouchTap={this.handleClose}>Dar seguimiento a reporte</MenuItem>
+              <MenuItem onTouchTap={this.handleClose} style={styleItemsTop}>DAR SEGUIMIENTO A REPORTE</MenuItem>
             </Link>
             <Link to="/reporte">
-              <MenuItem onTouchTap={this.handleClose}>Nuevo Reporte</MenuItem>
+              <MenuItem onTouchTap={this.handleClose} style={styleItemsSecond}>NUEVO REPORTE</MenuItem>
+            </Link>
+            <Link to="/administrador">
+              <MenuItem onTouchTap={this.handleClose} style={styleItemsThird}>ADMINISTRADOR</MenuItem>
             </Link>
           </Drawer>
         </div>

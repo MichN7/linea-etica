@@ -8,7 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const App = () => (
   <MuiThemeProvider>
-    <div>
+    <div id='app'>
         <Principal />
     </div>
   </MuiThemeProvider>
