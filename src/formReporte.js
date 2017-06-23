@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AutoComplete from 'material-ui/AutoComplete';
 import ReporteVoz from './reporteVoz.js';
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
@@ -91,7 +90,6 @@ handleChangeNotas = (event) => {
      ];
     return (
       <form onSubmit={this.subirDatos}>
-      <MuiThemeProvider>
       <div id='nuevo'>
 
       <Dialog
@@ -115,26 +113,24 @@ handleChangeNotas = (event) => {
         </div>
       <p>Lugar donde se detectó la práctica</p>
       <AutoComplete
-          hintText="ejemplo almacen"
+          hintText="Ex. Almacén"
           dataSource={this.state.dataLugar}
           onUpdateInput={this.handleUpdateInputLugar}
         />
           <p>Personas involucradas</p>
         <AutoComplete
-          hintText="ejemplo Lic Dominguez"
+          hintText="Ex. Licenciado Alberto Diaz"
           dataSource={this.state.dataPersonas}
           onUpdateInput={this.handleUpdateInputPersonas}
         />
-
-        <RaisedButton
-        label=" Enviar "
-        type="submit"
-        secondary={true}
-      />
-
+        <div>
+          <RaisedButton
+          label=" Enviar "
+          type="submit"
+          secondary={true}
+          />
+        </div>
       </div>
-
-      </MuiThemeProvider>
       </form>
 
     );

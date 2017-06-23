@@ -40,7 +40,7 @@ render(){
     <div id='seguimiento'>
     <p>Coloca el ID de reporte</p>
     <AutoComplete
-        hintText="ejemplo 4135"
+        hintText="Ex. 709237"
         dataSource={this.state.dataSource}
         onUpdateInput={this.handleUpdateInput}
       />

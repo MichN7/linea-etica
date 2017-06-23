@@ -6,12 +6,12 @@ div#nuevo {
 }
 
 div#nuevo a{
-  text-decoration: none;
+  text-decoration: underline;
   color: #0EBFE9;
 }
 
 div#nuevo a:hover{
-  text-decoration: none;
+  text-decoration: underline;
   color: #65909A;
 }
 

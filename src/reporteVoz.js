@@ -9,6 +9,7 @@ import ReactGA                     from 'react-ga';
 import { ReactMic } from 'react-mic';
 import ReactConfirmAlert, { confirmAlert } from 'react-confirm-alert'; // Import
 import './reporteVoz.css';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const styleRecord = {
  color : 'blue',
@@ -110,7 +111,12 @@ class ReporteVoz extends Component{
          <br />
          <br />
          <div className="buttonConfirm">
-       <button onClick={this.submit}>Enviar Audio</button>
+         <RaisedButton
+           label="Enviar Audio"
+           type="submit"
+           secondary={true}
+           onTouchTap={this.submit}
+         />
      </div>
        </div>
    </MuiThemeProvider>
