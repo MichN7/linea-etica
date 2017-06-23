@@ -93,6 +93,7 @@ handleChangeNotas = (event) => {
       <form onSubmit={this.subirDatos}>
       <MuiThemeProvider>
       <div id='nuevo'>
+
       <Dialog
          title="Dialog With Actions"
          actions={actions}
@@ -106,6 +107,7 @@ handleChangeNotas = (event) => {
        y valores.</p>
          <Link to="/GrabarRepo">¿Prefiere grabar el reporte?</Link>
        <div>
+         <p>Describe brevemente lo ocurrido</p>
         <TextField ref='notas' hintText="" multiLine={true} rows={2} rowsMax={4}
          value={this.state.caso}
          onChange={this.handleChangeNotas}

@@ -36,37 +36,25 @@ render(){
   return(
     <form onSubmit={this.revision}>
     <MuiThemeProvider>
-      <div id='seguimiento'>
-        <p>Escribe el ID de reporte</p>
-        <AutoComplete
-            hintText="Ex. 142373"
-            dataSource={this.state.dataSource}
-            onUpdateInput={this.handleUpdateInput}
-          />
-          <div id='seguimiento-button'>
-            <RaisedButton
-            href="/reporte_status"
-            target="_self"
-            label=" Aceptar "
-            primary={true} />
-          </div>
-          <div id='seguimiento-link'>
-            <Link to="/reporte" >¿Nuevo reporte?</Link>
-          </div>
-      </div>
-    <div>
+
+    <div id='seguimiento'>
     <p>Coloca el ID de reporte</p>
     <AutoComplete
         hintText="ejemplo 4135"
         dataSource={this.state.dataSource}
         onUpdateInput={this.handleUpdateInput}
       />
+      <div id='seguimiento-button'>
       <RaisedButton
       label=" Aceptar "
       type="onSubmit"
       secondary={true}
+      href="/reporte_status"
     />
-    <a><p>¿Nuevo reporte?</p></a>
+    </div>
+    <div id='seguimiento-link'>
+      <Link to="/reporte" >¿Nuevo reporte?</Link>
+    </div>
 
     </div>
     </MuiThemeProvider>
