@@ -10,6 +10,8 @@ import { ReactMic } from 'react-mic';
 import ReactConfirmAlert, { confirmAlert } from 'react-confirm-alert'; // Import
 import './reporteVoz.css';
 import RaisedButton from 'material-ui/RaisedButton';
+import * as firebase from 'firebase'
+import { ref, firebaseAuth } from './const.js'
 
 const styleRecord = {
  color : 'blue',
@@ -26,7 +28,7 @@ class ReporteVoz extends Component{
     this.state = {
       record: false,
       blobObject: null,
-      isRecording: false
+      isRecording: false,
     }
   }
 
@@ -51,16 +53,36 @@ class ReporteVoz extends Component{
   onStop= (blobObject) => {
 
     this.setState({
-      blobURL : blobObject.blobURL
+      blobURL : blobObject.blobURL,
+      blob: blobObject.blob
     })
   }
+
+  subirStorage(audio){
+
+  }
+
   submit = () => {
     confirmAlert({
       title: 'Linea-Etica',                        // Title dialog
       message: 'Estas seguro que quieres mandar este audio?',               // Message dialog
       confirmLabel: 'Enviar',                           // Text button confirm
       cancelLabel: 'Cancelar',                             // Text button cancel
-      onConfirm: () =>alert('subiendo audio'+this.state.blobURL),
+      onConfirm: () => {
+        var audio = this.state.blob;
+        alert('subiendo audio'+audio);
+        var storageRef = firebase.storage().ref("Audio");
+        var file = audio;
+        const task = storageRef.put(file);
+        task.on('state_changed', function(snapshot){
+
+        }, function(error) {
+          alert("error");
+        }, function() {
+          alert("se subió");
+          var downloadURL = task.snapshot.downloadURL;
+        });
+      },
       onCancel: () =>   this.setState({
           record: false,
           isRecording: false
@@ -75,11 +97,11 @@ class ReporteVoz extends Component{
      <MuiThemeProvider>
        <div id='grabar'>
          <h2>Graba tu reporte</h2>
-         <p>1.-Menciona tu nombre y apellidos (opcional)</p>
-         <p>2.-Fecha y hora de lo ocurrido </p>
-         <p>3.-Personas involucradar (nombre,area,puesto)</p>
-         <p>4.-¿Se lo ha notificado a la Dirección?</p>
-         <p>5.-Describa lo ocurrido</p>
+          <p>1.- Menciona tu nombre y apellidos (Opcional)</p>
+          <p>2.- ¿Donde, que día y a que hora ocurrió?</p>
+          <p>3.- ¿Quienes fueron las persona(s) involucradas? (Nombre, aréa, puesto)</p>
+          <p>4.- ¿Se lo has notificado a algún supervisor, gerente o Recursos Humanos?</p>
+          <p>5.- Describe lo ocurrido</p>
          <ReactMic
            className="oscilloscope"
            record={this.state.record}

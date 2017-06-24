@@ -101,9 +101,9 @@ handleChangeNotas = (event) => {
        El reporte fue enviado, para darle seguimiento conserva este código : {this.state.id}
      </Dialog>
       <p>REPORTE DE CASO,
-      en este espacio puede reportar la situación detectada de prácticas que van en contra de nuestros principios
+      en este espacio puedes reportar la situación detectada de prácticas que van en contra de nuestros principios
        y valores.</p>
-         <Link to="/GrabarRepo">¿Prefiere grabar el reporte?</Link>
+         <Link to="/GrabarRepo">¿Prefieres grabar el reporte?</Link>
        <div>
          <p>Describe brevemente lo ocurrido</p>
         <TextField ref='notas' hintText="" multiLine={true} rows={2} rowsMax={4}
@@ -111,13 +111,13 @@ handleChangeNotas = (event) => {
          onChange={this.handleChangeNotas}
          />
         </div>
-      <p>Lugar donde se detectó la práctica</p>
+      <p>¿En donde fue lo ocurrido?</p>
       <AutoComplete
           hintText="Ex. Almacén"
           dataSource={this.state.dataLugar}
           onUpdateInput={this.handleUpdateInputLugar}
         />
-          <p>Personas involucradas</p>
+          <p>¿Quienes fueron las persona(s) involucradas? (Nombre, aréa, puesto)?</p>
         <AutoComplete
           hintText="Ex. Licenciado Alberto Diaz"
           dataSource={this.state.dataPersonas}

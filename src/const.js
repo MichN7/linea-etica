@@ -1,5 +1,5 @@
 import * as firebase from 'firebase';
-var config = {
+export var config = {
     apiKey: "AIzaSyBXouqsFNkMX_3LMSLigOIOGFmwAe-_5Ug",
     authDomain: "linea-etica.firebaseapp.com",
     databaseURL: "https://linea-etica.firebaseio.com",
