@@ -25,12 +25,20 @@ class Seguimiento extends Component{
  };
 revision=()=>{
   var nip=this.state.dataSource;
+  var reporte;
+var p1=new Promise (
+  function(resolve, reject){
   var refDB=ref.child("reportes/"+ nip);
   refDB.on('value', snapshot=>{
-    var reporte=snapshot.val().lugar;
+    resolve(reporte=snapshot.val().lugar);
 
   });
-  alert(this.reporte);
+});
+p1.then(
+  function(val){
+    alert(val);
+  }
+);
 }
 render(){
   return(
@@ -47,9 +55,9 @@ render(){
       <div id='seguimiento-button'>
       <RaisedButton
       label=" Aceptar "
-      type="onSubmit"
+      onClick={this.revision}
       secondary={true}
-      href="/reporte_status"
+
     />
     </div>
     <div id='seguimiento-link'>
