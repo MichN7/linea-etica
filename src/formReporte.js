@@ -8,6 +8,9 @@ import { ref } from './const.js'
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import DatePicker from 'material-ui/DatePicker';
+import Popover from 'material-ui/Popover/Popover';
+import {Menu, MenuItem} from 'material-ui/Menu';
 var id = require('shortid');
 
 const styletext = {
@@ -17,9 +20,13 @@ const styletext = {
 class Reporte extends Component {
   constructor(){
     super()
+    let self = this;
   this.state = {
     dataLugar: [],
     dataPersonas:[],
+    dataHora:[],
+    dataDia:[],
+    radioVal: null,
     id:'0'
  };
 
@@ -29,7 +36,9 @@ class Reporte extends Component {
    var idReporte=id.generate();
    this.setState({
      id:idReporte,
-     open:false
+     open:false,
+     radio: false,
+     radioT:false
    });
  }
  subirDatos =()=>{
@@ -39,6 +48,9 @@ class Reporte extends Component {
       caso:`${this.state.caso}`,
       lugar:`${this.state.dataLugar}`,
       persona:`${this.state.dataPersonas}`,
+      hora:`${this.state.dataHora}`,
+      dia:`${this.state.dataDia}`,
+      radio: `${this.state.radioVal}`
     }),
 
 
@@ -65,6 +77,22 @@ class Reporte extends Component {
      ]
    });
  };
+ handleUpdateInputDia = (value) => {
+   alert(value);
+   this.setState({
+     dataDia: [
+       value
+     ]
+   });
+ };
+ handleUpdateInputHora = (value) => {
+
+   this.setState({
+     dataHora: [
+       value
+     ]
+   });
+ };
 handleChangeNotas = (event) => {
 
    this.setState({
@@ -77,6 +105,29 @@ handleChangeNotas = (event) => {
      this.setState({open: false});
    };
 
+   setFechaDesde(x,event){
+        alert(JSON.stringify(event));
+        alert(JSON.stringify(x));
+    }
+
+   getValue = (e) =>{
+     let value = e.target.value;
+     if(value === "Sí"){
+       this.setState({
+         radio:true,
+         radioT:false,
+         radioVal:value
+       })
+     }
+     else if(value === "No"){
+       this.setState({
+         radio:false,
+         radioT:true,
+         radioVal:value
+       })
+     }
+
+   }
    render() {
      const actions = [
 
@@ -111,25 +162,45 @@ handleChangeNotas = (event) => {
          onChange={this.handleChangeNotas}
          />
         </div>
-      <p>¿En donde fue lo ocurrido?</p>
-      <AutoComplete
-          hintText="Ex. Almacén"
-          dataSource={this.state.dataLugar}
-          onUpdateInput={this.handleUpdateInputLugar}
-        />
-          <p>¿Quienes fueron las persona(s) involucradas? (Nombre, aréa, puesto)?</p>
+        <p>¿En donde fue lo ocurrido?</p>
         <AutoComplete
-          hintText="Ex. Licenciado Alberto Diaz"
-          dataSource={this.state.dataPersonas}
-          onUpdateInput={this.handleUpdateInputPersonas}
-        />
-        <div>
-          <RaisedButton
-          label=" Enviar "
-          type="submit"
-          secondary={true}
+            hintText="Ex. Almacén"
+            dataSource={this.state.dataLugar}
+            onUpdateInput={this.handleUpdateInputLugar}
           />
-        </div>
+          <p>¿A que hora sucedió?</p>
+          <AutoComplete
+              hintText="Ex. 3:00 pm"
+              dataSource={this.state.dataHora}
+              onUpdateInput={this.handleUpdateInputHora}
+          />
+            <p>¿En que día?</p>
+            <DatePicker container="inline"
+              floatingLabelText="Fecha desde"
+              onChange={(x, event) => this.setFechaDesde(x,event)}
+              defaultDate={new Date()}
+             />
+          <p>¿Quienes fueron las persona(s) involucradas? (Nombre, aréa, puesto)?</p>
+          <AutoComplete
+            hintText="Ex. Licenciado Alberto Diaz"
+            dataSource={this.state.dataPersonas}
+            onUpdateInput={this.handleUpdateInputPersonas}
+          />
+          <p>¿Se lo has notificado a algún supervisor, gerente o Recursos Humanos?</p>
+          <div onChange={this.getValue.bind(this)}>
+            <input type="radio" name="check" value="Sí" checked={this.state.radio}/>
+            <label>Si</label>
+            <input type="radio" name="check" value="No" checked={this.state.radioT}/>
+            <label>No</label>
+          </div>
+          <div id='nuevo-button'>
+            <br />
+            <RaisedButton
+            label=" Enviar "
+            type="submit"
+            secondary={true}
+            />
+          </div>
       </div>
       </form>
 

@@ -25,7 +25,7 @@ const Items = (props) =>{
           }
           secondaryTextLines={2}
         />
-        <Divider inset={true} />
+        <Divider inset={true}/>
         </div>
       )}
     </div>
@@ -68,8 +68,6 @@ class ListaAdmin extends Component{
               mails: array,
               mailsIds: arrayId
             })
-
-            alert(self.state.mails[1].caso)
           }
         )
 

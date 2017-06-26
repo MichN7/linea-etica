@@ -24,3 +24,7 @@ div#nuevo-descripcion{
   text-align: left;
   margin-left: 15%;
 }
+
+div#nuevo-button{
+  margin-bottom: 5%;
+}
