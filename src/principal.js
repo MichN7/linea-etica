@@ -9,6 +9,7 @@ import {Switch} from 'react-router-dom'
 import AppBarExampleIcon from './ActionBar.js';
 import Main from './main.js'
 import Admin from './admin.js'
+import AdminList from './admin-list.js'
 
 const Routes = () => (
   <Switch>
@@ -18,6 +19,7 @@ const Routes = () => (
     <Route path="/reporte" component={Reporte}/>
     <Route path="/GrabarRepo" component={ReporteVoz}/>
     <Route path="/administrador" component={Admin}/>
+    <Route path="/administrador-list" component={AdminList}/>
   </Switch>
 );
 

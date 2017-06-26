@@ -35,6 +35,7 @@ class Admin extends Component{
           <RaisedButton
           label="Aceptar"
           type="submit"
+          href="/administrador-list"
           secondary={true}
           />
         </div>
