@@ -25,7 +25,6 @@ class Reporte extends Component {
     dataLugar: [],
     dataPersonas:[],
     dataHora:[],
-    dataDia:[],
     radioVal: null,
     id:'0'
  };
@@ -42,14 +41,13 @@ class Reporte extends Component {
    });
  }
  subirDatos =()=>{
-
   var refDB=ref.child("reportes/" +`${this.state.id}`);
     refDB.set({
       caso:`${this.state.caso}`,
       lugar:`${this.state.dataLugar}`,
       persona:`${this.state.dataPersonas}`,
       hora:`${this.state.dataHora}`,
-      dia:`${this.state.dataDia}`,
+      dia:`${this.state.dia}`,
       radio: `${this.state.radioVal}`
     }),
 
@@ -77,14 +75,7 @@ class Reporte extends Component {
      ]
    });
  };
- handleUpdateInputDia = (value) => {
-   alert(value);
-   this.setState({
-     dataDia: [
-       value
-     ]
-   });
- };
+
  handleUpdateInputHora = (value) => {
 
    this.setState({
@@ -106,8 +97,11 @@ handleChangeNotas = (event) => {
    };
 
    setFechaDesde(x,event){
-        alert(JSON.stringify(event));
-        alert(JSON.stringify(x));
+     var fecha=JSON.stringify(event);
+    var fechaFormat=fecha.substring(1,11);
+        this.setState({
+          dia:fechaFormat
+        })
     }
 
    getValue = (e) =>{
@@ -178,7 +172,7 @@ handleChangeNotas = (event) => {
             <DatePicker container="inline"
               floatingLabelText="Fecha desde"
               onChange={(x, event) => this.setFechaDesde(x,event)}
-              defaultDate={new Date()}
+
              />
           <p>¿Quienes fueron las persona(s) involucradas? (Nombre, aréa, puesto)?</p>
           <AutoComplete

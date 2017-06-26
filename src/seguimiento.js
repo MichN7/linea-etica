@@ -36,7 +36,7 @@ var p1=new Promise (
 });
 p1.then(
   function(val){
-    alert(val);
+  
   }
 );
 }
@@ -52,6 +52,7 @@ render(){
         dataSource={this.state.dataSource}
         onUpdateInput={this.handleUpdateInput}
       />
+      <Link to="reporte_status">
       <div id='seguimiento-button'>
       <RaisedButton
       label=" Aceptar "
@@ -60,6 +61,7 @@ render(){
 
     />
     </div>
+    </Link>
     <div id='seguimiento-link'>
       <Link to="/reporte" >¿Nuevo reporte?</Link>
     </div>
