@@ -26,6 +26,7 @@ class Reporte extends Component {
     dataPersonas:[],
     dataHora:[],
     radioVal: null,
+    nombre: [],
     id:'0'
  };
 
@@ -43,12 +44,14 @@ class Reporte extends Component {
  subirDatos =()=>{
   var refDB=ref.child("reportes/" +`${this.state.id}`);
     refDB.set({
+      nombre:`${this.state.nombre}`,
       caso:`${this.state.caso}`,
       lugar:`${this.state.dataLugar}`,
       persona:`${this.state.dataPersonas}`,
       hora:`${this.state.dataHora}`,
       dia:`${this.state.dia}`,
       radio: `${this.state.radioVal}`
+
     }),
 
 
@@ -71,6 +74,14 @@ class Reporte extends Component {
 
    this.setState({
      dataPersonas: [
+       value
+     ]
+   });
+ };
+ handleUpdateInputNombre = (value) => {
+
+   this.setState({
+     nombre: [
        value
      ]
    });
@@ -146,35 +157,42 @@ handleChangeNotas = (event) => {
        El reporte fue enviado, para darle seguimiento conserva este código : {this.state.id}
      </Dialog>
       <p>REPORTE DE CASO,
-      en este espacio puedes reportar la situación detectada de prácticas que van en contra de nuestros principios
+      en este espacio puedes reportar la situación detectada de prácticas qué van en contra de nuestros principios
        y valores.</p>
          <Link to="/GrabarRepo">¿Prefieres grabar el reporte?</Link>
        <div>
+       <br/>
+       <p>Escribe tu nombre y apellido (opcional)</p>
+       <AutoComplete
+           hintText="Ex. Jose López Pérez o Anonimo"
+           dataSource={this.state.nombre}
+           onUpdateInput={this.handleUpdateInputNombre}
+         />
          <p>Describe brevemente lo ocurrido</p>
         <TextField ref='notas' hintText="" multiLine={true} rows={2} rowsMax={4}
          value={this.state.caso}
          onChange={this.handleChangeNotas}
          />
         </div>
-        <p>¿En donde fue lo ocurrido?</p>
+        <p>¿En dónde fue lo ocurrido?</p>
         <AutoComplete
             hintText="Ex. Almacén"
             dataSource={this.state.dataLugar}
             onUpdateInput={this.handleUpdateInputLugar}
           />
-          <p>¿A que hora sucedió?</p>
+          <p>¿A qué hora sucedió?</p>
           <AutoComplete
               hintText="Ex. 3:00 pm"
               dataSource={this.state.dataHora}
               onUpdateInput={this.handleUpdateInputHora}
           />
-            <p>¿En que día?</p>
+            <p>¿En qué día?</p>
             <DatePicker container="inline"
               floatingLabelText="Fecha desde"
               onChange={(x, event) => this.setFechaDesde(x,event)}
 
              />
-          <p>¿Quienes fueron las persona(s) involucradas? (Nombre, aréa, puesto)?</p>
+          <p>¿Quiénes fueron las personas involucradas? (Nombre, aréa, puesto)?</p>
           <AutoComplete
             hintText="Ex. Licenciado Alberto Diaz"
             dataSource={this.state.dataPersonas}
