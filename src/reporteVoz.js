@@ -99,7 +99,7 @@ class ReporteVoz extends Component{
          <h2>Graba tu reporte</h2>
           <p>1.- Menciona tu nombre y apellidos (Opcional)</p>
           <p>2.- ¿Donde, que día y a que hora ocurrió?</p>
-          <p>3.- ¿Quienes fueron las persona(s) involucradas? (Nombre, aréa, puesto)</p>
+          <p>3.- ¿Quiénes fueron las personas involucradas? (Nombre, aréa, puesto)</p>
           <p>4.- ¿Se lo has notificado a algún supervisor, gerente o Recursos Humanos?</p>
           <p>5.- Describe lo ocurrido</p>
          <ReactMic

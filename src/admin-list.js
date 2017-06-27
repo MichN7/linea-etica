@@ -24,6 +24,7 @@ const Items = (props) =>{
             </p>
           }
           secondaryTextLines={2}
+          href= {props.mailsIds[i].toString()}
         />
         <Divider inset={true}/>
         </div>
@@ -37,17 +38,18 @@ class ListaAdmin extends Component{
     super();
     let today = new Date(),
         date = today.getDate()+ '-' + (today.getMonth() + 1) + '-' + today.getFullYear() ;
-        this.state={
-          date:date,
-          mails: [],
-          mailsIds: []
-        }
         var database = firebase.database();
         var ref = database.ref();
         var array = [];
         let arrayId = [];
         var idRef = ref.child("reportes/");
         let self = this;
+        this.state={
+          date:date,
+          mails: [],
+          mailsIds: []
+        }
+
         var promise = new Promise(
           function(resolve,reject){
             idRef.on("value", function(snapshot) {
@@ -62,7 +64,6 @@ class ListaAdmin extends Component{
 
         )
         promise.then(
-
           function(){
             self.setState({
               mails: array,

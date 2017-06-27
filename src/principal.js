@@ -10,6 +10,7 @@ import AppBarExampleIcon from './ActionBar.js';
 import Main from './main.js'
 import Admin from './admin.js'
 import AdminList from './admin-list.js'
+import Key from './admin-user.js'
 
 const Routes = () => (
   <Switch>
@@ -20,6 +21,7 @@ const Routes = () => (
     <Route path="/GrabarRepo" component={ReporteVoz}/>
     <Route path="/administrador" component={Admin}/>
     <Route path="/administrador-list" component={AdminList}/>
+    <Route path="/:key" component={Key}/>
   </Switch>
 );
 
