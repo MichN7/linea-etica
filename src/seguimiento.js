@@ -14,6 +14,7 @@ const style = {
 class Seguimiento extends Component{
   state = {
    dataSource: [],
+   direccion:'/seguimiento'
  };
 
  handleUpdateInput = (value) => {
@@ -24,6 +25,7 @@ class Seguimiento extends Component{
    });
  };
 revision=()=>{
+  let self=this;
   var nip=this.state.dataSource;
   var reporte;
 var p1=new Promise (
@@ -36,7 +38,14 @@ var p1=new Promise (
 });
 p1.then(
   function(val){
-  
+    if(val==null){
+      alert('nip incorrecto');
+    }
+    else{
+    self.setState({
+      direccion:'/lista'
+    });
+    }
   }
 );
 }
@@ -52,7 +61,10 @@ render(){
         dataSource={this.state.dataSource}
         onUpdateInput={this.handleUpdateInput}
       />
-      <Link to="reporte_status">
+      <Link to= {{
+        pathname: this.state.direccion,
+        state: { nip: this.state.dataSource }
+      }}>
       <div id='seguimiento-button'>
       <RaisedButton
       label=" Aceptar "

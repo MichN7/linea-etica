@@ -12,6 +12,12 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 var avatar="https://lh5.googleusercontent.com/WzOu1Kmx4A7dRopd0G52T3dbNx-cujHOidqd1c_VMxTieeTFdUMzpCdIV_-aNpkGU5TCgRrQKQ";
 class Lista extends Component{
+  constructor(props){
+    super();
+    alert('hola');
+    var x=props.location.state.nip;
+    alert(x[0]);
+  }
 
   render(){
     return(
