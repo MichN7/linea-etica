@@ -53,6 +53,7 @@ class Admin extends Component{
           <RaisedButton
           label="Aceptar"
           type="submit"
+          secondary={true}
           />
         </div>
       </div>

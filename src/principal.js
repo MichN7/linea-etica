@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import { Route, BrowserRouter, Link, Redirect, Switch,Router } from 'react-router-dom'
 import Reporte from './formReporte.js';
 import Seguimiento from './seguimiento.js';
 import Lista from './listaStatus.js';
@@ -10,6 +10,7 @@ import Main from './main.js'
 import Admin from './admin.js'
 import AdminList from './admin-list.js'
 import Key from './admin-user.js'
+import AppBar from './ActionBar'
 
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
@@ -34,7 +35,7 @@ function PublicRoute ({component: Component, authed, ...rest}) {
   )
 }
 
-export default class Principal extends Component {
+class Routes extends Component {
   state = {
     authed: false,
     loading: true,
@@ -61,23 +62,33 @@ export default class Principal extends Component {
   render() {
 
       return this.state.loading === true ? <h1>Loading</h1> : (
-            <BrowserRouter>
 
-                    <Switch>
-                    <Route exact path="/" component={Main}/>
-                    <Route path="/seguimiento" component={Seguimiento}/>
-                    <Route path="/lista" component={Lista}/>
-                    <Route path="/reporte" component={Reporte}/>
-                    <Route path="/GrabarRepo" component={ReporteVoz}/>
-                    
-
-                  <PublicRoute authed={this.state.authed} path='/login' component={Admin} />
-                  <PrivateRoute authed={this.state.authed} path='/admin' component={AdminList} />
-                  <Route render={() => <h3>Uups! algo paso mal :D</h3>} />
-                </Switch>
-
-        </BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Main}/>
+            <Route path="/seguimiento" component={Seguimiento}/>
+            <Route path="/lista" component={Lista}/>
+            <Route path="/reporte" component={Reporte}/>
+            <Route path="/GrabarRepo" component={ReporteVoz}/>
+            <PublicRoute authed={this.state.authed} path='/login' component={Admin} />
+            <PrivateRoute authed={this.state.authed} path='/admin' component={AdminList} />
+            <Route render={() => <h3>Uups! algo paso mal :D</h3>} />
+          </Switch>
 
     );
   }
 }
+
+const Principal = () =>{
+  return(
+    <div>
+      <BrowserRouter>
+          <div>
+            <AppBar />
+            <Routes />
+          </div>
+        </BrowserRouter>
+      </div>
+    );
+}
+
+export default Principal;

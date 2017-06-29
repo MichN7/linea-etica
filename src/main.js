@@ -6,9 +6,7 @@ import AppBarExampleIcon from './ActionBar.js';
 class Main extends Component{
   render(){
     return(
-
       <div>
-    <AppBarExampleIcon />
     <div id='main'>
         <div id='main-seguimiento'>
           <RaisedButton
