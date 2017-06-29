@@ -9,6 +9,8 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import * as firebase from 'firebase'
+import { ref, firebaseAuth } from './const.js'
+
 var avatar="https://lh5.googleusercontent.com/WzOu1Kmx4A7dRopd0G52T3dbNx-cujHOidqd1c_VMxTieeTFdUMzpCdIV_-aNpkGU5TCgRrQKQ";
 
 const Items = (props) =>{
@@ -24,6 +26,7 @@ const Items = (props) =>{
             </p>
           }
           secondaryTextLines={2}
+          href= {props.mailsIds[i].toString()}
         />
         <Divider inset={true}/>
         </div>
@@ -37,17 +40,18 @@ class ListaAdmin extends Component{
     super();
     let today = new Date(),
         date = today.getDate()+ '-' + (today.getMonth() + 1) + '-' + today.getFullYear() ;
-        this.state={
-          date:date,
-          mails: [],
-          mailsIds: []
-        }
         var database = firebase.database();
         var ref = database.ref();
         var array = [];
         let arrayId = [];
         var idRef = ref.child("reportes/");
         let self = this;
+        this.state={
+          date:date,
+          mails: [],
+          mailsIds: []
+        }
+
         var promise = new Promise(
           function(resolve,reject){
             idRef.on("value", function(snapshot) {
@@ -62,7 +66,6 @@ class ListaAdmin extends Component{
 
         )
         promise.then(
-
           function(){
             self.setState({
               mails: array,
@@ -76,6 +79,8 @@ class ListaAdmin extends Component{
   render(){
     return(
         <div>
+        <a onClick={() => this.handleItemClick(firebaseAuth().signOut() )} href="/">Salir</a>
+
           <List>
             <Subheader>{this.state.date}</Subheader>
             <Items mails={this.state.mails} mailsIds={this.state.mailsIds}/>

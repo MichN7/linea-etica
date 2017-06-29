@@ -22,44 +22,43 @@ class Reporte extends Component {
     super()
     let self = this;
   this.state = {
+    id: '0',
     dataLugar: [],
     dataPersonas:[],
     dataHora:[],
     radioVal: null,
-    nombre: [],
-    id:'0'
+    nombre: []
+
  };
 
 
  }
  componentWillMount(){
-   var idReporte=id.generate();
+
    this.setState({
-     id:idReporte,
      open:false,
      radio: false,
-     radioT:false
+     radioT:false,
+     repo: false
    });
+
  }
- subirDatos =()=>{
-  var refDB=ref.child("reportes/" +`${this.state.id}`);
+ subirDatos(){
+  var idReporte=id.generate();
+  var refDB=ref.child("reportes/" +idReporte);
     refDB.set({
       nombre:`${this.state.nombre}`,
       caso:`${this.state.caso}`,
       lugar:`${this.state.dataLugar}`,
-      persona:`${this.state.dataPersonas}`,
+      personaInvolucrada:`${this.state.dataPersonas}`,
       hora:`${this.state.dataHora}`,
       dia:`${this.state.dia}`,
       radio: `${this.state.radioVal}`
 
-    }),
+    })
 
 
-  this.setState({
-    open: true
-  });
-
-};
+}
 
  handleUpdateInputLugar = (value) => {
 
@@ -82,6 +81,15 @@ class Reporte extends Component {
 
    this.setState({
      nombre: [
+       value
+     ]
+   });
+ };
+
+ handleUpdateInputNombre = (value) => {
+
+   this.setState({
+     dataNombre: [
        value
      ]
    });
@@ -133,6 +141,14 @@ handleChangeNotas = (event) => {
      }
 
    }
+   submit = () => {
+     this.setState({
+       open: true
+
+     });
+     alert(this.state.id);
+   };
+
    render() {
      const actions = [
 
@@ -141,9 +157,11 @@ handleChangeNotas = (event) => {
           onClick={this.handleClose}
          primary={true}
        />
-
-
      ];
+
+
+
+
     return (
       <form onSubmit={this.subirDatos}>
       <div id='nuevo'>
@@ -188,9 +206,7 @@ handleChangeNotas = (event) => {
           />
             <p>¿En qué día?</p>
             <DatePicker container="inline"
-              floatingLabelText="Fecha desde"
               onChange={(x, event) => this.setFechaDesde(x,event)}
-
              />
           <p>¿Quiénes fueron las personas involucradas? (Nombre, aréa, puesto)?</p>
           <AutoComplete
@@ -212,6 +228,14 @@ handleChangeNotas = (event) => {
             type="submit"
             secondary={true}
             />
+          </div>
+          <div id='nuevo-button'>
+            <br />
+            <RaisedButton
+              label=" obtener ID "
+              onTouchTap={this.submit}
+              secondary={true}
+              />
           </div>
       </div>
       </form>

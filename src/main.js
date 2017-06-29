@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router-dom'
 import "./main.css"
-
+import AppBarExampleIcon from './ActionBar.js';
 class Main extends Component{
   render(){
     return(
-      <div id='main'>
+
+      <div>
+    <AppBarExampleIcon />
+    <div id='main'>
         <div id='main-seguimiento'>
           <RaisedButton
             label="Dar Seguimiento a reporte"
@@ -22,6 +25,7 @@ class Main extends Component{
             secondary={true}
             href="/reporte"
           />
+          </div>
         </div>
       </div>
     )

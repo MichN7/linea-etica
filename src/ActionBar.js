@@ -61,7 +61,7 @@ class AppBarExampleIcon extends React.Component {
             <Link to="/reporte">
               <MenuItem onTouchTap={this.handleClose} style={styleItemsSecond}>NUEVO REPORTE</MenuItem>
             </Link>
-            <Link to="/administrador">
+            <Link to="/admin">
               <MenuItem onTouchTap={this.handleClose} style={styleItemsThird}>ADMINISTRADOR</MenuItem>
             </Link>
           </Drawer>
