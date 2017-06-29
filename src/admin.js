@@ -17,9 +17,12 @@ const styleContrasena = {
 };
 
 class Admin extends Component{
-  handleSubmit = (e) => {
-   e.preventDefault()
-   firebaseAuth().signInWithEmailAndPassword(this.email.value,this.pw.value)
+  state= {
+    email: null,
+    password: null
+  }
+  handleSubmit = () => {
+   firebaseAuth().signInWithEmailAndPassword(this.state.email,this.state.password)
      .catch(function(error) {
        var errorCode = error.code;
        var errorMessage = error.message;
@@ -37,27 +40,49 @@ class Admin extends Component{
 
  });
  }
+
+ handleChangeEmail = (event) => {
+
+    this.setState({
+      email:event.target.value
+    });
+
+  }
+
+  handleChangePassword = (event) => {
+
+     this.setState({
+       password:event.target.value
+     });
+
+   }
+
   render(){
     return(
-       <form onSubmit={this.handleSubmit}  role="form">
       <div id='admin-form'>
         <div id='admin-correo'>
           <p>CORREO</p>
-         <input  id="inputEmail3" name='email' ref={(email) => this.email = email} placeholder="Email" required/>
+         <TextField ref='notas' hintText="" required type="email"
+          onChange={this.handleChangeEmail}
+           errorText="Este campo es requerido"
+          />
         </div>
         <div id='admin-contrasena'>
           <p>CONTRASEÑA</p>
-        <input  name='pass' id="inputPassword3" placeholder="Password" type="password" ref={(pw) => this.pw = pw} required/>
+        <TextField ref='notas' hintText="" required type="password"
+         onChange={this.handleChangePassword}
+          errorText="Este campo es requerido"
+         />
         </div>
         <div id='admin-button'>
           <RaisedButton
           label="Aceptar"
           type="submit"
           secondary={true}
+          onTouchTap={this.handleSubmit}
           />
         </div>
       </div>
-       </form>
     )
   }
 }

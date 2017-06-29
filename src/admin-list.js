@@ -10,6 +10,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import * as firebase from 'firebase'
 import { ref, firebaseAuth } from './const.js'
+import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 
 var avatar="https://lh5.googleusercontent.com/WzOu1Kmx4A7dRopd0G52T3dbNx-cujHOidqd1c_VMxTieeTFdUMzpCdIV_-aNpkGU5TCgRrQKQ";
 
@@ -18,6 +19,10 @@ const Items = (props) =>{
     <div>
       {props.mails.map((mail,i) =>
         <div>
+        <Link to= {{
+          pathname: props.mailsIds[i],
+          state: { id: props.mailsIds[i]}
+        }}>
         <ListItem
           primaryText= {props.mailsIds[i].toString()}
           secondaryText={
@@ -26,8 +31,8 @@ const Items = (props) =>{
             </p>
           }
           secondaryTextLines={2}
-          href= {props.mailsIds[i].toString()}
         />
+        </Link>
         <Divider inset={true}/>
         </div>
       )}
@@ -79,8 +84,7 @@ class ListaAdmin extends Component{
   render(){
     return(
         <div>
-        <a onClick={() => this.handleItemClick(firebaseAuth().signOut() )} href="/">Salir</a>
-
+        <a onClick={() => firebaseAuth().signOut() } href="/admin">Salir</a>
           <List>
             <Subheader>{this.state.date}</Subheader>
             <Items mails={this.state.mails} mailsIds={this.state.mailsIds}/>

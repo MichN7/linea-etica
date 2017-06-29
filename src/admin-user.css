@@ -1,0 +1,20 @@
+#respuesta-input{
+  resize: none;
+  width: 93%;
+  margin-left: 3%;
+  height: 13em;
+}
+
+#respuesta-radioButtons{
+  text-align: center;
+}
+
+#respuesta h4{
+  text-align: center;
+}
+
+#respuesta-button{
+  margin-top: 2%;
+  text-align: center;
+  margin-bottom: 4%;
+}

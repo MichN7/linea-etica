@@ -71,6 +71,7 @@ class Routes extends Component {
             <Route path="/GrabarRepo" component={ReporteVoz}/>
             <PublicRoute authed={this.state.authed} path='/login' component={Admin} />
             <PrivateRoute authed={this.state.authed} path='/admin' component={AdminList} />
+            <PrivateRoute authed={this.state.authed} path='/:key' component={Key} />
             <Route render={() => <h3>Uups! algo paso mal :D</h3>} />
           </Switch>
 
