@@ -4,6 +4,7 @@ import AutoComplete from 'material-ui/AutoComplete';
 import ReporteVoz from './reporteVoz.js';
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import './formReporte.css'
+import './react-confirm-alert.css'
 import { ref } from './const.js'
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
@@ -11,6 +12,7 @@ import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
 import Popover from 'material-ui/Popover/Popover';
 import {Menu, MenuItem} from 'material-ui/Menu';
+import ReactConfirmAlert, { confirmAlert } from 'react-confirm-alert';
 var id = require('shortid');
 
 const styletext = {
@@ -27,15 +29,16 @@ class Reporte extends Component {
     dataPersonas:[],
     dataHora:[],
     radioVal: null,
-    nombre: []
+    nombre: [],
 
  };
 
 
  }
  componentWillMount(){
-
+  var idReporte=id.generate();
    this.setState({
+     id:idReporte,
      open:false,
      radio: false,
      radioT:false,
@@ -43,22 +46,7 @@ class Reporte extends Component {
    });
 
  }
- subirDatos(){
-  var idReporte=id.generate();
-  var refDB=ref.child("reportes/" +idReporte);
-    refDB.set({
-      nombre:`${this.state.nombre}`,
-      caso:`${this.state.caso}`,
-      lugar:`${this.state.dataLugar}`,
-      personaInvolucrada:`${this.state.dataPersonas}`,
-      hora:`${this.state.dataHora}`,
-      dia:`${this.state.dia}`,
-      radio: `${this.state.radioVal}`
 
-    })
-
-
-}
 
  handleUpdateInputLugar = (value) => {
 
@@ -109,11 +97,7 @@ handleChangeNotas = (event) => {
      caso:event.target.value
    });
 
- };
-
- handleClose = () => {
-     this.setState({open: false});
-   };
+ }
 
    setFechaDesde(x,event){
      var fecha=JSON.stringify(event);
@@ -142,38 +126,42 @@ handleChangeNotas = (event) => {
 
    }
    submit = () => {
-     this.setState({
-       open: true
+     confirmAlert({
+       title: 'Linea-Etica',                        // Title dialog
+       message:  "El reporte fue enviado, para darle seguimiento conserva este código : " +this.state.id,               // Message dialog
+       confirmLabel: 'Enviar',                           // Text button confirm
+       cancelLabel: 'Cancelar',                             // Text button cancel
+       onConfirm: () => {
 
-     });
-     alert(this.state.id);
+           var refDB=ref.child("reportes/" +this.state.id);
+             refDB.set({
+               nombre:`${this.state.nombre}`,
+               caso:`${this.state.caso}`,
+               lugar:`${this.state.dataLugar}`,
+               personaInvolucrada:`${this.state.dataPersonas}`,
+               hora:`${this.state.dataHora}`,
+               dia:`${this.state.dia}`,
+               radio: `${this.state.radioVal}`
+
+             }),
+             this.setState({
+                 id:'0'
+               })
+
+       },
+       onCancel: () =>   this.setState({
+           record: false,
+           isRecording: false
+         }),      // Action after Cancel
+     })
    };
 
    render() {
-     const actions = [
-
-       <FlatButton
-         label="Cancel"
-          onClick={this.handleClose}
-         primary={true}
-       />
-     ];
-
-
-
 
     return (
-      <form onSubmit={this.subirDatos}>
+
       <div id='nuevo'>
 
-      <Dialog
-         title="Dialog With Actions"
-         actions={actions}
-        onRequestClose={this.handleClose}
-         open={this.state.open}
-       >
-       El reporte fue enviado, para darle seguimiento conserva este código : {this.state.id}
-     </Dialog>
       <p>REPORTE DE CASO,
       en este espacio puedes reportar la situación detectada de prácticas qué van en contra de nuestros principios
        y valores.</p>
@@ -224,21 +212,15 @@ handleChangeNotas = (event) => {
           <div id='nuevo-button'>
             <br />
             <RaisedButton
-            label=" Enviar "
-            type="submit"
-            secondary={true}
+              label="Enviar Audio"
+              type="submit"
+              secondary={true}
+              onTouchTap={this.submit}
             />
           </div>
-          <div id='nuevo-button'>
-            <br />
-            <RaisedButton
-              label=" obtener ID "
-              onTouchTap={this.submit}
-              secondary={true}
-              />
-          </div>
+
       </div>
-      </form>
+
 
     );
   }
