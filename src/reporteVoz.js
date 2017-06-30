@@ -12,6 +12,7 @@ import './reporteVoz.css';
 import './react-confirm-alert.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as firebase from 'firebase'
+
 import { ref, firebaseAuth } from './const.js'
 var id = require('shortid')
 
