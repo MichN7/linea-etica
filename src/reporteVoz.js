@@ -99,7 +99,8 @@ class ReporteVoz extends Component{
           var refDB=ref.child("reportes/" +`${self.state.id}`);
           var refDBStatus=ref.child("reportes/"+ `${self.state.id}` + "/seguimiento");
           refDB.set({
-            audio:url,
+            audioURL:url,
+            audio:true,
           }),
           refDBStatus.push({
             notas: 'El reporte ha sido recibido pero aún no se ha revisado',

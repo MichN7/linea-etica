@@ -11,12 +11,13 @@ import MenuItem from 'material-ui/MenuItem';
 import * as firebase from 'firebase'
 import { ref, firebaseAuth } from './const.js'
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import './admin-list.css'
 
 var avatar="https://lh5.googleusercontent.com/WzOu1Kmx4A7dRopd0G52T3dbNx-cujHOidqd1c_VMxTieeTFdUMzpCdIV_-aNpkGU5TCgRrQKQ";
 
 const Items = (props) =>{
   return(
-    <div>
+    <div id='items'>
       {props.mails.map((mail,i) =>
         <div>
         <Link to= {{
@@ -27,7 +28,7 @@ const Items = (props) =>{
           primaryText= {props.mailsIds[i].toString()}
           secondaryText={
             <p>
-              {props.mails[i].caso}
+              {props.mails[i].audio ? 'Se ha enviado un audio, da click aquí para escucharlo.' : props.mails[i].caso}
             </p>
           }
           secondaryTextLines={2}
@@ -44,7 +45,7 @@ class ListaAdmin extends Component{
   constructor(){
     super();
     let today = new Date(),
-        date = today.getDate()+ '-' + (today.getMonth() + 1) + '-' + today.getFullYear() ;
+        date = today.getDate()+ '-' + '0' +(today.getMonth() + 1) + '-' + today.getFullYear() ;
         var database = firebase.database();
         var ref = database.ref();
         var array = [];

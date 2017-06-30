@@ -30,7 +30,6 @@ class Reporte extends Component {
     dataHora:[],
     radioVal: null,
     nombre: [],
-
  };
 
 
@@ -134,7 +133,6 @@ handleChangeNotas = (event) => {
        confirmLabel: 'Enviar',                           // Text button confirm
        cancelLabel: 'Cancelar',                             // Text button cancel
        onConfirm: () => {
-
            var refDB=ref.child("reportes/" +this.state.id);
            var refDBStatus=ref.child("reportes/"+ this.state.id+ "/seguimiento");
              refDB.set({
@@ -223,7 +221,7 @@ handleChangeNotas = (event) => {
           <div id='nuevo-button'>
             <br />
             <RaisedButton
-              label="Enviar Audio"
+              label="Enviar"
               type="submit"
               secondary={true}
               onTouchTap={this.submit}

@@ -6,14 +6,16 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { ref } from './const.js'
 
 const Carta = (props) =>{
-  let caso = props.idData[0];
-  let dia = props.idData[1];
-  let hora = props.idData[2];
-  let lugar = props.idData[3];
-  let nombre = props.idData[4];
-  let personaInvolucrada = props.idData[5];
-  let radio = props.idData[6];
+  let audio = props.idData[0];
+  let caso = props.idData[1];
+  let dia = props.idData[2];
+  let hora = props.idData[3];
+  let lugar = props.idData[4];
+  let nombre = props.idData[5];
+  let personaInvolucrada = props.idData[6];
+  let radio = props.idData[7];
   let id = props.id;
+
   return(
     <div>
       <Card>
@@ -21,18 +23,29 @@ const Carta = (props) =>{
           title={id}
           subtitle={
             <div>
-            <p><strong>Sucedió el día:</strong> {dia}</p>
-            <p><strong>Sucedió a las:</strong> {hora}</p>
-            <p><strong>Sucedió en:</strong> {lugar}</p>
-            <p><strong>Personas Involucradas:</strong> {personaInvolucrada}</p>
-            <p><strong>Se le notificó a algún supervisor, gerente o Recursos Humanos:</strong> {radio}</p>
+              {audio === false ?
+                <div>
+                  <p><strong>Sucedió el día:</strong> {dia}</p>
+                  <p><strong>Sucedió a las:</strong> {hora}</p>
+                  <p><strong>Sucedió en:</strong> {lugar}</p>
+                  <p><strong>Personas Involucradas:</strong> {personaInvolucrada}</p>
+                  <p><strong>Se le notificó a algún supervisor, gerente o Recursos Humanos:</strong> {radio}</p>
+                </div>
+              : "Haga click en el botón de play para reproducir"}
             </div>
           }
           actAsExpander={false}
           showExpandableButton={false}
         />
         <CardText expandable={false}>
-          {caso}
+          {audio ?
+            <audio controls="controls" src={caso}></audio>
+            :" "
+          }
+          {
+            audio === false ?
+            caso : " "
+          }
         </CardText>
       </Card>
     </div>

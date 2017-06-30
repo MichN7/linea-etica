@@ -5,16 +5,21 @@ import Dialog from 'material-ui/Dialog';
 import AutoComplete from 'material-ui/AutoComplete';
 import TextField from 'material-ui/TextField';
 import { ref, firebaseAuth } from './const.js'
-
+import {cyan500} from 'material-ui/styles/colors'
 import './admin.css'
 
-const styleCorreo = {
-    color: '#0EBFE9',
-};
+const styles = {
+    errorStyle: {
+     color: cyan500,
+   },
+   styleCorreo:{
+       color: '#0EBFE9',
+   },
+   styleContrasena: {
+      color: '#FF4081',
+  }
+}
 
-const styleContrasena = {
-    color: '#FF4081',
-};
 
 class Admin extends Component{
   state= {
@@ -65,6 +70,7 @@ class Admin extends Component{
          <TextField ref='notas' hintText="" required type="email"
           onChange={this.handleChangeEmail}
            errorText="Este campo es requerido"
+          errorStyle={styles.errorStyle}
           />
         </div>
         <div id='admin-contrasena'>
@@ -72,6 +78,7 @@ class Admin extends Component{
         <TextField ref='notas' hintText="" required type="password"
          onChange={this.handleChangePassword}
           errorText="Este campo es requerido"
+           errorStyle={styles.errorStyle}
          />
         </div>
         <div id='admin-button'>
