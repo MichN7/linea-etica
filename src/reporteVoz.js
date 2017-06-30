@@ -111,6 +111,7 @@ class ReporteVoz extends Component{
           alert('subido a la bd');
         }
       )
+    window.location.reload();
       },
       onCancel: () =>   this.setState({
           record: false,
