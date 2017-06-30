@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
+import { ref } from './const.js'
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
@@ -11,12 +11,63 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 var avatar="https://lh5.googleusercontent.com/WzOu1Kmx4A7dRopd0G52T3dbNx-cujHOidqd1c_VMxTieeTFdUMzpCdIV_-aNpkGU5TCgRrQKQ";
+
+const Listado =(props)=>{
+  return(
+    <div>
+    {props.objeto.map((msg,i)=>
+      <div>
+    <ListItem
+      leftAvatar={<Avatar src={avatar} />}
+      primaryText={props.objeto[i].fecha}
+      secondaryText={
+        <p>
+        <span style={{color: darkBlack}}>{props.objeto[i].status}</span> --
+        {props.objeto[i].notas}
+        </p>
+      }
+      secondaryTextLines={2}
+    />
+
+    <Divider inset={true} />
+    </div>
+  )}
+    </div>
+
+  );
+}
+
 class Lista extends Component{
   constructor(props){
-    super();
-    alert('hola');
+      super()
+    var array=[];
     var x=props.location.state.nip;
-    alert(x[0]);
+    var referencia=ref.child("reportes/"+ x[0]+"/seguimiento");//reportes/x[0]/status
+    let self=this;
+    this.state={
+          mensajes:[]
+    }
+    var promise= new Promise(
+    function(resolve, reject){
+        referencia.on('value',data =>  {
+          console.log(data.val());
+          data.forEach(function(childSnapshot){
+            var datos=childSnapshot.val();
+          resolve(array=array.concat({fecha:datos.fecha,notas:datos.notas,
+            status:datos.status}));
+          })
+      });
+    }
+  )
+
+  promise.then(
+    function(){
+      self.setState({
+        mensajes:array
+      })
+    }
+  );
+
   }
 
   render(){
@@ -25,68 +76,9 @@ class Lista extends Component{
         <div>
           <List>
             <Subheader>Today</Subheader>
-            <ListItem
-              leftAvatar={<Avatar src={avatar} />}
-              primaryText="Brunch this weekend?"
-              secondaryText={
-                <p>
-                <span style={{color: darkBlack}}>Brendan Lim</span> --
-                I&apos;ll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                </p>
-              }
-              secondaryTextLines={2}
-            />
+            <Listado objeto={this.state.mensajes}/>
 
-          <Divider inset={true} />
-      <ListItem
-        leftAvatar={<Avatar src={avatar} />}
-        primaryText={
-          <p>Summer BBQ&nbsp;&nbsp;<span style={{color: lightBlack}}>4</span></p>
-        }
-        secondaryText={
-          <p>
-            <span style={{color: darkBlack}}>to me, Scott, Jennifer</span> --
-            Wish I could come, but I&apos;m out of town this weekend.
-          </p>
-        }
-        secondaryTextLines={2}
-      />
-      <Divider inset={true} />
-      <ListItem
-        leftAvatar={<Avatar src="images/uxceo-128.jpg" />}
-        primaryText="Oui oui"
-        secondaryText={
-          <p>
-            <span style={{color: darkBlack}}>Grace Ng</span> --
-            Do you have Paris recommendations? Have you ever been?
-          </p>
-        }
-        secondaryTextLines={2}
-      />
-      <Divider inset={true} />
-      <ListItem
-        leftAvatar={<Avatar src="images/kerem-128.jpg" />}
-        primaryText="Birdthday gift"
-        secondaryText={
-          <p>
-            <span style={{color: darkBlack}}>Kerem Suer</span> --
-            Do you have any ideas what we can get Heidi for her birthday? How about a pony?
-          </p>
-        }
-        secondaryTextLines={2}
-      />
-      <Divider inset={true} />
-      <ListItem
-        leftAvatar={<Avatar src="images/raquelromanp-128.jpg" />}
-        primaryText="Recipe to try"
-        secondaryText={
-          <p>
-            <span style={{color: darkBlack}}>Raquel Parrado</span> --
-            We should eat this: grated squash. Corn and tomatillo tacos.
-          </p>
-        }
-        secondaryTextLines={2}
-      />
+
     </List>
   </div>
       </MuiThemeProvider>

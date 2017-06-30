@@ -59,7 +59,7 @@ class Respuesta extends Component{
     alert(this.state.dataNotas);
     alert(this.state.radioVal);
     var refDB = ref.child("reportes/"+this.state.id + "/" + "seguimiento");
-    refDB.set({
+    refDB.push({
       notas: `${this.state.dataNotas}`,
       status: `${this.state.radioVal}`,
       fecha: `${this.state.fecha}`,

@@ -126,6 +126,8 @@ handleChangeNotas = (event) => {
 
    }
    submit = () => {
+     let today = new Date,
+     date = today.getDate()+ '-' + '0'+(today.getMonth() + 1) + '-' + today.getFullYear() ;
      confirmAlert({
        title: 'Linea-Etica',                        // Title dialog
        message:  "El reporte fue enviado, para darle seguimiento conserva este código : " +this.state.id,               // Message dialog
@@ -134,6 +136,7 @@ handleChangeNotas = (event) => {
        onConfirm: () => {
 
            var refDB=ref.child("reportes/" +this.state.id);
+           var refDBStatus=ref.child("reportes/"+ this.state.id+ "/seguimiento");
              refDB.set({
                nombre:`${this.state.nombre}`,
                caso:`${this.state.caso}`,
@@ -144,6 +147,13 @@ handleChangeNotas = (event) => {
                radio: `${this.state.radioVal}`
 
              }),
+
+             refDBStatus.push({
+               notas: 'El reporte ha sido recibido pero aún no se ha revisado',
+               status: 'Recibido',
+               fecha: date
+             }),
+
              this.setState({
                  id:'0'
                })
