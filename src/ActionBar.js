@@ -3,6 +3,7 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import {Link, Route} from 'react-router-dom'
+import BackButton from '@react-ag-components/back-button'
 import Seguimiento from './seguimiento.js';
 import "./ActionBar.css"
 
@@ -48,7 +49,9 @@ class AppBarExampleIcon extends React.Component {
             title="LINEA ÉTICA GAM"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
             onTouchTap={this.handleToggle}
+            iconElementRight={<BackButton/>}
           />
+
           <Drawer
             docked={false}
             width={200}
@@ -64,7 +67,9 @@ class AppBarExampleIcon extends React.Component {
             <Link to="/admin">
               <MenuItem onTouchTap={this.handleClose} style={styleItemsThird}>ADMINISTRADOR</MenuItem>
             </Link>
+
           </Drawer>
+
         </div>
     );
   }
