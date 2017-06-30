@@ -77,7 +77,6 @@ class ReporteVoz extends Component{
       onConfirm: () => {
         var audio = this.state.blob;
         var downloadURL;
-        alert('subiendo audio'+audio);
         var storageRef = firebase.storage().ref(`${this.state.id}`);
         var file = audio;
         const task = storageRef.put(file);
@@ -88,7 +87,6 @@ class ReporteVoz extends Component{
         }, function(error) {
           alert("error");
         }, function() {
-          alert("se subió");
         resolve(downloadURL = task.snapshot.downloadURL);
         });
       })//end promise
@@ -107,11 +105,17 @@ class ReporteVoz extends Component{
             status: 'Recibido',
             fecha: date,
             audio:true
-          })
-          alert('subido a la bd');
+          }),
+          confirmAlert({
+             title: 'Linea-Etica',
+             message: 'El reporte se enviado exitosamente',
+             confirmLabel: 'Aceptar',  // Text button confirm
+             onConfirm: () => {
+               window.location.reload();
+          }   })
         }
       )
-    window.location.reload();
+
       },
       onCancel: () =>   this.setState({
           record: false,

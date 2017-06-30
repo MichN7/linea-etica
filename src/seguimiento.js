@@ -32,14 +32,14 @@ var p1=new Promise (
   function(resolve, reject){
   var refDB=ref.child("reportes/"+ nip);
   refDB.on('value', snapshot=>{
-    resolve(reporte=snapshot.val().lugar);
+    resolve(reporte=snapshot.val());
 
   });
 });
 p1.then(
   function(val){
     if(val==null){
-      alert('nip incorrecto');
+      alert('ID incorrecto');
     }
     else{
     self.setState({
