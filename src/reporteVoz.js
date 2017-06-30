@@ -13,6 +13,7 @@ import './react-confirm-alert.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as firebase from 'firebase'
 import { ref, firebaseAuth } from './const.js'
+var id = require('shortid')
 
 const styleRecord = {
  color : 'blue',
@@ -26,7 +27,9 @@ const styleGrabacion = {
 class ReporteVoz extends Component{
   constructor(props){
     super(props);
+    var idReporte=id.generate();
     this.state = {
+      id: idReporte,
       record: false,
       blobObject: null,
       isRecording: false,
@@ -64,6 +67,8 @@ class ReporteVoz extends Component{
   }
 
   submit = () => {
+    var promise;
+    var self=this;
     confirmAlert({
       title: 'Linea-Etica',                        // Title dialog
       message: 'Estas seguro que quieres mandar este audio?',               // Message dialog
@@ -71,24 +76,47 @@ class ReporteVoz extends Component{
       cancelLabel: 'Cancelar',                             // Text button cancel
       onConfirm: () => {
         var audio = this.state.blob;
+        var downloadURL;
         alert('subiendo audio'+audio);
-        var storageRef = firebase.storage().ref("Audio");
+        var storageRef = firebase.storage().ref(`${this.state.id}`);
         var file = audio;
         const task = storageRef.put(file);
+         promise=new Promise(
+          function(resolve,reject){
         task.on('state_changed', function(snapshot){
 
         }, function(error) {
           alert("error");
         }, function() {
           alert("se subió");
-          var downloadURL = task.snapshot.downloadURL;
+        resolve(downloadURL = task.snapshot.downloadURL);
         });
+      })//end promise
+      promise.then(
+        function(url){
+          let today = new Date,
+          date = today.getDate()+ '-' + '0'+(today.getMonth() + 1) + '-' + today.getFullYear() ;
+          var refDB=ref.child("reportes/" +`${self.state.id}`);
+          var refDBStatus=ref.child("reportes/"+ `${self.state.id}` + "/seguimiento");
+          refDB.set({
+            audio:url,
+          }),
+          refDBStatus.push({
+            notas: 'El reporte ha sido recibido pero aún no se ha revisado',
+            status: 'Recibido',
+            fecha: date,
+            audio:true
+          })
+          alert('subido a la bd');
+        }
+      )
       },
       onCancel: () =>   this.setState({
           record: false,
           isRecording: false
         }),      // Action after Cancel
     })
+
   };
 
   render(){
