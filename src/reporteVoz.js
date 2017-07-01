@@ -109,7 +109,7 @@ class ReporteVoz extends Component{
           }),
           confirmAlert({
              title: 'Linea-Etica',
-             message: 'El reporte se enviado exitosamente',
+             message:  "El reporte fue enviado, para darle seguimiento conserva este código : " +self.state.id,
              confirmLabel: 'Aceptar',  // Text button confirm
              onConfirm: () => {
                window.location.reload();
