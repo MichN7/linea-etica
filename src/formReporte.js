@@ -141,8 +141,8 @@ handleChangeNotas = (event) => {
                personaInvolucrada:`${this.state.dataPersonas}`,
                hora:`${this.state.dataHora}`,
                dia:`${this.state.dia}`,
-               radio: `${this.state.radioVal}`
-
+               radio: `${this.state.radioVal}`,
+              audio:false
              }),
              refDBStatus.push({
                notas: 'El reporte ha sido recibido pero aún no se ha revisado',
