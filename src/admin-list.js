@@ -16,19 +16,22 @@ import './admin-list.css'
 var avatar="https://lh5.googleusercontent.com/WzOu1Kmx4A7dRopd0G52T3dbNx-cujHOidqd1c_VMxTieeTFdUMzpCdIV_-aNpkGU5TCgRrQKQ";
 
 const Items = (props) =>{
+
   return(
     <div id='items'>
       {props.mails.map((mail,i) =>
+
         <div>
         <Link to= {{
           pathname: props.mailsIds[i],
           state: { id: props.mailsIds[i]}
         }}>
+        <Subheader>{' fecha de envio : '+ new Date(props.mails[i].diaActual).getDate()+"-"+ new Date(props.mails[i].diaActual).getMonth()+'-'+ new Date(props.mails[i].diaActual).getFullYear()}</Subheader>
         <ListItem
           primaryText= {props.mailsIds[i].toString()}
           secondaryText={
             <p>
-              {props.mails[i].audio ? 'Se ha enviado un audio, da click aquí para escucharlo.' : props.mails[i].caso}
+              {props.mails[i].audio ? 'Se ha enviado un audio, da click aquí para escucharlo. ':props.mails[i].caso}
             </p>
           }
           secondaryTextLines={2}
@@ -50,21 +53,24 @@ class ListaAdmin extends Component{
         var ref = database.ref();
         var array = [];
         let arrayId = [];
+
+
         var idRef = ref.child("reportes/");
         let self = this;
         this.state={
           date:date,
           mails: [],
-          mailsIds: []
+          mailsIds: [],
         }
 
         var promise = new Promise(
           function(resolve,reject){
-            idRef.on("value", function(snapshot) {
+            idRef.orderByChild("diaActual").on("value", function(snapshot) {
             snapshot.forEach(function(child) {
                 resolve(
                   array = array.concat(child.val()),
                   arrayId = arrayId.concat(child.key),
+
                 );
               });
             });
@@ -75,7 +81,8 @@ class ListaAdmin extends Component{
           function(){
             self.setState({
               mails: array,
-              mailsIds: arrayId
+              mailsIds: arrayId,
+
             })
           }
         )
@@ -87,8 +94,8 @@ class ListaAdmin extends Component{
         <div>
         <a onClick={() => firebaseAuth().signOut() } href="/admin">Salir</a>
           <List>
-            <Subheader>{this.state.date}</Subheader>
-            <Items mails={this.state.mails} mailsIds={this.state.mailsIds}/>
+
+            <Items mails={this.state.mails} mailsIds={this.state.mailsIds} />
           </List>
         </div>
     );

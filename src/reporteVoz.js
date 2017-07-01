@@ -100,6 +100,7 @@ class ReporteVoz extends Component{
           refDB.set({
             audioURL:url,
             audio:true,
+            diaActual:today.getTime()
           }),
           refDBStatus.push({
             notas: 'El reporte ha sido recibido pero aún no se ha revisado',
@@ -113,7 +114,10 @@ class ReporteVoz extends Component{
              confirmLabel: 'Aceptar',  // Text button confirm
              onConfirm: () => {
                window.location.reload();
-          }   })
+          },   
+          onCancel: () => {window.location.reload();}
+
+        })
         }
       )
 

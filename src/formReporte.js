@@ -127,7 +127,7 @@ handleChangeNotas = (event) => {
      date = today.getDate()+ '-' + '0'+(today.getMonth() + 1) + '-' + today.getFullYear() ;
      confirmAlert({
        title: 'Linea-Etica',                        // Title dialog
-       message:  "El reporte fue enviado, para darle seguimiento conserva este código : " +this.state.id,               // Message dialog
+       message:  "¿Está seguro que desea enviar el reporte? ",               // Message dialog
        confirmLabel: 'Enviar',                           // Text button confirm
        cancelLabel: 'Cancelar',                             // Text button cancel
        onConfirm: () => {
@@ -141,6 +141,7 @@ handleChangeNotas = (event) => {
                personaInvolucrada:`${this.state.dataPersonas}`,
                hora:`${this.state.dataHora}`,
                dia:`${this.state.dia}`,
+               diaActual:today.getTime(),
                radio: `${this.state.radioVal}`,
               audio:false
              }),
@@ -158,7 +159,14 @@ handleChangeNotas = (event) => {
                  radioVal: null,
                  nombre: []
                })
-            window.location.reload();
+               confirmAlert({
+                 title: 'Linea-Etica',                        // Title dialog
+                 message:  "El reporte fue enviado, para darle seguimiento conserva este código : " +this.state.id,               // Message dialog
+                 confirmLabel: 'Ok',                           // Text button confirm
+                 onConfirm: () => {window.location.reload()},
+                  onCancel: () =>{window.location.reload()},
+               })
+
        },
        onCancel: () =>   this.setState({
            record: false,
