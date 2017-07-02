@@ -2,8 +2,11 @@ import React,{Component} from 'react'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import * as firebase from 'firebase'
 import './admin-user.css'
+import ReactConfirmAlert, { confirmAlert } from 'react-confirm-alert'; // Import
 import RaisedButton from 'material-ui/RaisedButton';
 import { ref } from './const.js'
+import { Route, BrowserRouter, Link, Redirect, Switch,Router } from 'react-router-dom'
+
 
 const Carta = (props) =>{
   let audio = props.idData[0];
@@ -69,18 +72,26 @@ class Respuesta extends Component{
   }
 
   submit = () =>{
-    alert(this.state.dataNotas);
-    alert(this.state.radioVal);
+
     var refDB = ref.child("reportes/"+this.state.id + "/" + "seguimiento");
     refDB.push({
       notas: `${this.state.dataNotas}`,
       status: `${this.state.radioVal}`,
       fecha: `${this.state.fecha}`,
     })
+    confirmAlert({
+       title: 'Linea-Etica',
+       message:  "El estado del reporte se ha actualizado exitosamente",
+       confirmLabel: 'Aceptar',  // Text button confirm
+       onConfirm: () => {
+        window.location.href = "/admin";
+    },
+    onCancel: () => {window.location.href = "/admin";}
+  })
+
   }
 
   getValue = (e) =>{
-    alert(e.target.value);
     let value = e.target.value;
     if(value === "Recibido"){
       this.setState({

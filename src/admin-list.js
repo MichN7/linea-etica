@@ -26,7 +26,7 @@ const Items = (props) =>{
           pathname: props.mailsIds[i],
           state: { id: props.mailsIds[i]}
         }}>
-        <Subheader>{' fecha de envio : '+ new Date(props.mails[i].diaActual).getDate()+"-"+ new Date(props.mails[i].diaActual).getMonth()+'-'+ new Date(props.mails[i].diaActual).getFullYear()}</Subheader>
+        <Subheader>{' Fecha de envío : '+ new Date(props.mails[i].diaActual).getDate()+"-"+ new Date(props.mails[i].diaActual).getMonth()+'-'+ new Date(props.mails[i].diaActual).getFullYear()}</Subheader>
         <ListItem
           primaryText= {props.mailsIds[i].toString()}
           secondaryText={
