@@ -12,11 +12,12 @@ const Carta = (props) =>{
   let audio = props.idData[0];
   let caso = props.idData[1];
   let dia = props.idData[2];
-  let hora = props.idData[3];
-  let lugar = props.idData[4];
-  let nombre = props.idData[5];
-  let personaInvolucrada = props.idData[6];
-  let radio = props.idData[7];
+  let diaActual = props.idData[3];
+  let hora = props.idData[4];
+  let lugar = props.idData[5];
+  let nombre = props.idData[6];
+  let personaInvolucrada = props.idData[7];
+  let radio = props.idData[8];
   let id = props.id;
 
   return(

@@ -13,20 +13,17 @@ import { ref, firebaseAuth } from './const.js'
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import './admin-list.css'
 
-var avatar="https://lh5.googleusercontent.com/WzOu1Kmx4A7dRopd0G52T3dbNx-cujHOidqd1c_VMxTieeTFdUMzpCdIV_-aNpkGU5TCgRrQKQ";
-
 const Items = (props) =>{
 
   return(
     <div id='items'>
       {props.mails.map((mail,i) =>
-
         <div>
         <Link to= {{
           pathname: props.mailsIds[i],
           state: { id: props.mailsIds[i]}
         }}>
-        <Subheader>{' Fecha de envío : '+ new Date(props.mails[i].diaActual).getDate()+"-"+ new Date(props.mails[i].diaActual).getMonth()+'-'+ new Date(props.mails[i].diaActual).getFullYear()}</Subheader>
+        <Subheader>{' Fecha de envío : '+ props.mails[i].diaActual}</Subheader>
         <ListItem
           primaryText= {props.mailsIds[i].toString()}
           secondaryText={
@@ -94,7 +91,6 @@ class ListaAdmin extends Component{
         <div>
         <a onClick={() => firebaseAuth().signOut() } href="/admin">Salir</a>
           <List>
-
             <Items mails={this.state.mails} mailsIds={this.state.mailsIds} />
           </List>
         </div>

@@ -74,14 +74,6 @@ class Reporte extends Component {
    });
  };
 
- handleUpdateInputNombre = (value) => {
-
-   this.setState({
-     dataNombre: [
-       value
-     ]
-   });
- };
  handleUpdateInputHora = (value) => {
 
    this.setState({
@@ -124,7 +116,7 @@ handleChangeNotas = (event) => {
    }
    submit = () => {
      let today = new Date,
-     date = today.getDate()+ '-' + '0'+(today.getMonth() + 1) + '-' + today.getFullYear() ;
+     date = today.getDate()+ '-' + today.getMonth() + '-' + today.getFullYear() ;
      confirmAlert({
        title: 'Linea-Etica',                        // Title dialog
        message:  "¿Está seguro que desea enviar el reporte? ",               // Message dialog
@@ -141,7 +133,7 @@ handleChangeNotas = (event) => {
                personaInvolucrada:`${this.state.dataPersonas}`,
                hora:`${this.state.dataHora}`,
                dia:`${this.state.dia}`,
-               diaActual:today.getTime(),
+               diaActual: date,
                radio: `${this.state.radioVal}`,
               audio:false
              }),
