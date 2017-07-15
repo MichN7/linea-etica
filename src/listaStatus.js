@@ -49,7 +49,7 @@ class Lista extends Component{
     }
     var promise= new Promise(
     function(resolve, reject){
-        referencia.on('value',data =>  {
+        referencia.orderByChild("fecha").on('value',data =>  {
           console.log(data.val());
           data.forEach(function(childSnapshot){
             var datos=childSnapshot.val();
@@ -75,10 +75,8 @@ class Lista extends Component{
       <MuiThemeProvider>
         <div>
           <List>
-            <Subheader>Today</Subheader>
+            <Subheader>Seguimiento</Subheader>
             <Listado objeto={this.state.mensajes}/>
-
-
     </List>
   </div>
       </MuiThemeProvider>

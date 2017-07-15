@@ -94,15 +94,22 @@ class ReporteVoz extends Component{
       promise.then(
         function(url){
           let today = new Date,
-          date = today.getDate()+ '-' + '0'+(today.getMonth() + 1) + '-' + today.getFullYear() ;
+          date = ("0" + today.getDate()).slice(-2) + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + today.getFullYear();
           var refDB=ref.child("reportes/" +`${self.state.id}`);
           var refDBStatus=ref.child("reportes/"+ `${self.state.id}` + "/seguimiento");
+          var refDBStatusActual=ref.child("reportes/"+ `${self.state.id}` + "/seguimientoActual");
           refDB.set({
             audioURL:url,
             audio:true,
-            diaActual:today.getTime()
+            diaActual: date
           }),
           refDBStatus.push({
+            notas: 'El reporte ha sido recibido pero aún no se ha revisado',
+            status: 'Recibido',
+            fecha: date,
+            audio:true
+          }),
+          refDBStatusActual.set({
             notas: 'El reporte ha sido recibido pero aún no se ha revisado',
             status: 'Recibido',
             fecha: date,
@@ -114,7 +121,7 @@ class ReporteVoz extends Component{
              confirmLabel: 'Aceptar',  // Text button confirm
              onConfirm: () => {
                window.location.reload();
-          },   
+          },
           onCancel: () => {window.location.reload();}
 
         })

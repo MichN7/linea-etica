@@ -116,7 +116,7 @@ handleChangeNotas = (event) => {
    }
    submit = () => {
      let today = new Date,
-     date = today.getDate()+ '-' + today.getMonth() + '-' + today.getFullYear() ;
+     date = ("0" + today.getDate()).slice(-2) + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + today.getFullYear();
      confirmAlert({
        title: 'Linea-Etica',                        // Title dialog
        message:  "¿Está seguro que desea enviar el reporte? ",               // Message dialog
@@ -126,6 +126,7 @@ handleChangeNotas = (event) => {
 
            var refDB=ref.child("reportes/" +this.state.id);
            var refDBStatus=ref.child("reportes/"+ this.state.id+ "/seguimiento");
+           var refDBStatusActual=ref.child("reportes/"+ this.state.id+ "/seguimientoActual");
              refDB.set({
                nombre:`${this.state.nombre}`,
                caso:`${this.state.caso}`,
@@ -135,7 +136,7 @@ handleChangeNotas = (event) => {
                dia:`${this.state.dia}`,
                diaActual: date,
                radio: `${this.state.radioVal}`,
-              audio:false
+               audio:false
              }),
              refDBStatus.push({
                notas: 'El reporte ha sido recibido pero aún no se ha revisado',
@@ -143,6 +144,13 @@ handleChangeNotas = (event) => {
                fecha: date,
                audio:false
              }),
+             refDBStatusActual.set({
+               notas: 'El reporte ha sido recibido pero aún no se ha revisado',
+               status: 'Recibido',
+               fecha: date,
+               audio:false
+             }),
+             this.set
              this.setState({
                  id:'0',
                  dataLugar: [],

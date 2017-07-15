@@ -34,8 +34,16 @@ const Carta = (props) =>{
                   <p><strong>Sucedió en:</strong> {lugar}</p>
                   <p><strong>Personas Involucradas:</strong> {personaInvolucrada}</p>
                   <p><strong>Se le notificó a algún supervisor, gerente o Recursos Humanos:</strong> {radio}</p>
+                  <p><strong>Status: </strong> {props.idData[10].status} </p>
                 </div>
-              : "Haga click en el botón de play para reproducir"}
+              :" " }
+              {audio === true ?
+                <div>
+                  <p>Haga click en el botón de play para reproducir</p>
+                  <p>Status: {props.idData[4].status}</p>
+                </div>
+                : " "
+              }
             </div>
           }
           actAsExpander={false}
@@ -43,7 +51,9 @@ const Carta = (props) =>{
         />
         <CardText expandable={false}>
           {audio ?
+            <div>
             <audio controls="controls" src={caso}></audio>
+            </div>
             :" "
           }
           {
@@ -60,7 +70,7 @@ class Respuesta extends Component{
   constructor(props){
     super();
     let today = new Date,
-    date = today.getDate()+ '-' + '0'+(today.getMonth() + 1) + '-' + today.getFullYear() ;
+    date = ("0" + today.getDate()).slice(-2) + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + today.getFullYear()
     this.state={
       dataNotas:[],
       id: props.id,
@@ -74,8 +84,14 @@ class Respuesta extends Component{
 
   submit = () =>{
 
-    var refDB = ref.child("reportes/"+this.state.id + "/" + "seguimiento");
-    refDB.push({
+    var refSeguimiento = ref.child("reportes/"+this.state.id + "/" + "seguimiento");
+    var refSeguimientoActual = ref.child("reportes/"+this.state.id + "/" + "seguimientoActual");
+    refSeguimientoActual.update({
+      notas: `${this.state.dataNotas}`,
+      status: `${this.state.radioVal}`,
+      fecha: `${this.state.fecha}`,
+    })
+    refSeguimiento.push({
       notas: `${this.state.dataNotas}`,
       status: `${this.state.radioVal}`,
       fecha: `${this.state.fecha}`,
@@ -161,6 +177,7 @@ class Key extends Component{
     let array = [];
     var database = firebase.database();
     var ref = database.ref("reportes/"+id);
+    let statusArray = [];
 
     this.state={
       id: id,
@@ -170,9 +187,11 @@ class Key extends Component{
   var promise = new Promise(
       function(resolve,reject){
       ref.on('value', function(snapshot) {
+
         snapshot.forEach(function(child){
           resolve(
             array = array.concat(child.val()),
+
           );
         })
       });
