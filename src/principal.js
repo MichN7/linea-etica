@@ -64,13 +64,13 @@ class Routes extends Component {
       return this.state.loading === true ? <h1>Loading</h1> : (
 
           <Switch>
-            <Route exact path="/" component={Main}/>
-            <Route path="/seguimiento" component={Seguimiento}/>
-            <Route path="/lista" component={Lista}/>
-            <Route path="/reporte" component={Reporte}/>
-            <Route path="/GrabarRepo" component={ReporteVoz}/>
-            <PublicRoute authed={this.state.authed} path='/login' component={Admin} />
-            <PrivateRoute authed={this.state.authed} path='/admin' component={AdminList} />
+            <Route exact path="/ho" component={Main}/>
+            <Route path="/seguimientos" component={Seguimiento}/>
+            <Route path="/listas" component={Lista}/>
+            <Route path="/reportes" component={Reporte}/>
+            <Route path="/GrabarRepos" component={ReporteVoz}/>
+            <PublicRoute authed={this.state.authed} path='/logins' component={Admin} />
+            <PrivateRoute authed={this.state.authed} path='/admins' component={AdminList} />
             <PrivateRoute authed={this.state.authed} path='/:key' component={Key} />
             <Route render={() => <h3>Uups! algo paso mal :D</h3>} />
           </Switch>
