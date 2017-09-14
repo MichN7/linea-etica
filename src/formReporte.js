@@ -74,6 +74,14 @@ class Reporte extends Component {
    });
  };
 
+ handleUpdateInputNombre = (value) => {
+
+   this.setState({
+     dataNombre: [
+       value
+     ]
+   });
+ };
  handleUpdateInputHora = (value) => {
 
    this.setState({
@@ -116,7 +124,7 @@ handleChangeNotas = (event) => {
    }
    submit = () => {
      let today = new Date,
-     date = ("0" + today.getDate()).slice(-2) + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + today.getFullYear();
+     date = today.getDate()+ '-' + '0'+(today.getMonth() + 1) + '-' + today.getFullYear() ;
      confirmAlert({
        title: 'Linea-Etica',                        // Title dialog
        message:  "¿Está seguro que desea enviar el reporte? ",               // Message dialog
@@ -126,7 +134,6 @@ handleChangeNotas = (event) => {
 
            var refDB=ref.child("reportes/" +this.state.id);
            var refDBStatus=ref.child("reportes/"+ this.state.id+ "/seguimiento");
-           var refDBStatusActual=ref.child("reportes/"+ this.state.id+ "/seguimientoActual");
              refDB.set({
                nombre:`${this.state.nombre}`,
                caso:`${this.state.caso}`,
@@ -134,9 +141,9 @@ handleChangeNotas = (event) => {
                personaInvolucrada:`${this.state.dataPersonas}`,
                hora:`${this.state.dataHora}`,
                dia:`${this.state.dia}`,
-               diaActual: date,
+               diaActual:today.getTime(),
                radio: `${this.state.radioVal}`,
-               audio:false
+              audio:false
              }),
              refDBStatus.push({
                notas: 'El reporte ha sido recibido pero aún no se ha revisado',
@@ -144,13 +151,6 @@ handleChangeNotas = (event) => {
                fecha: date,
                audio:false
              }),
-             refDBStatusActual.set({
-               notas: 'El reporte ha sido recibido pero aún no se ha revisado',
-               status: 'Recibido',
-               fecha: date,
-               audio:false
-             }),
-             this.set
              this.setState({
                  id:'0',
                  dataLugar: [],
@@ -208,8 +208,9 @@ handleChangeNotas = (event) => {
           />
           <p>¿A qué hora sucedió?</p>
           <AutoComplete
-              hintText="Ex. 3:00 pm"
+
               dataSource={this.state.dataHora}
+              type="time"
               onUpdateInput={this.handleUpdateInputHora}
           />
             <p>¿En qué día?</p>
