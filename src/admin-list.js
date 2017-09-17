@@ -13,40 +13,77 @@ import { ref, firebaseAuth } from './const.js'
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import './admin-list.css'
 
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
+import Paper from 'material-ui/Paper';
+import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
+import FontIcon from 'material-ui/FontIcon';
+import MdAssignmentTurnedIn from 'react-icons/lib/md/assignment-turned-in';
+import MdAssignmentLate from 'react-icons/lib/md/assignment-late';
+import MdAssignment from 'react-icons/lib/md/assignment';
+import MdBackspace from 'react-icons/lib/md/backspace';
+import MdAssignmentInd from 'react-icons/lib/md/assignment-ind';
+
+const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
+const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
+const nearbyIcon = <IconLocationOn />;
+
+const checked = <MdAssignmentTurnedIn/>
+const recibido = <MdAssignmentLate />
+const proceso = <MdAssignment />
+const salir = <MdBackspace />
+const todos = <MdAssignmentInd />
+
 const style ={
   lineHeight: '5px',
   paddingBottom: '8px'
 }
 
 const styleItem = {
-  
+
 }
 
-const Items = (props) =>{
 
+const Items = (props) =>{
+  let arrayActivo = props.mails;
+  let arrayActivoIds = props.mailsIds;
+  if(props.selectedIndex == 0){
+   arrayActivo = props.mails;
+   arrayActivoIds = props.mailsIds;
+ }
+  else if(props.selectedIndex == 1){
+    arrayActivo = props.arrayRecibido;
+    arrayActivoIds = props.arrayRecibidoIds;
+  }
+  else if(props.selectedIndex == 2){
+    arrayActivo = props.arrayCompletos;
+    arrayActivoIds = props.arrayCompletosIds
+  }  else if(props.selectedIndex == 3){
+      arrayActivo = props.arrayEnProceso;
+      arrayActivoIds = props.arrayEnProcesoIds;
+    }
   return(
     <div id='items'>
-      {props.mails.map((mail,i) =>
+      {arrayActivo.map((mail,i) =>
         <div id='admin-list-item'>
           <Link to= {{
-            pathname: props.mailsIds[i],
-            state: { id: props.mailsIds[i]}
+            pathname: arrayActivoIds[i],
+            state: { id: arrayActivoIds[i]}
           }}>
           <Subheader>
-            <strong> Fecha de envío: </strong> { props.mails[i].diaActual }
+            <strong> Fecha de envío: </strong> { arrayActivo[i].diaActual }
           </Subheader>
           <Subheader style={style}>
             <strong> Status: </strong>
               {
-                props.mails[i].seguimientoActual.status
+                arrayActivo[i].seguimientoActual.status
               }
           </Subheader>
           <ListItem
           style = {styleItem}
-            primaryText= {props.mailsIds[i].toString()}
+            primaryText= {arrayActivoIds[i].toString()}
             secondaryText={
               <p>
-                {props.mails[i].audio ? 'Se ha enviado un audio, da click aquí para escucharlo. ':props.mails[i].caso}
+                {arrayActivo[i].audio ? 'Se ha enviado un audio, da click aquí para escucharlo. ':arrayActivo[i].caso}
               </p>
             }
             secondaryTextLines={2}
@@ -67,6 +104,12 @@ class ListaAdmin extends Component{
         var database = firebase.database();
         var ref = database.ref();
         var array = [];
+        let arrayCompletos = [];
+        let arrayCompletosIds = [];
+        let arrayEnProceso = [];
+        let arrayEnProcesoIds = [];
+        let arrayRecibido = [];
+        let arrayRecibidoIds = [];
         let arrayId = [];
         let arraySeguimiento = [];
 
@@ -78,6 +121,13 @@ class ListaAdmin extends Component{
           mails: [],
           mailsIds: [],
           seguimiento: [],
+          selectedIndex: 0,
+          completados:[],
+          completadosIds:[],
+          recibidos:[],
+          recibidosIds:[],
+          seguidos:[],
+          seguidosIds:[],
         }
 
         var promise = new Promise(
@@ -93,25 +143,84 @@ class ListaAdmin extends Component{
                 );
               });
             });
+
           }
         )
         promise.then(
           function(){
+            for (var i = 0; i < array.length; i++) {
+              if(array[i].seguimientoActual.status == "Completado"){
+                arrayCompletos = arrayCompletos.concat(array[i]);
+                arrayCompletosIds = arrayCompletosIds.concat(arrayId[i]);
+              }else if(array[i].seguimientoActual.status == "Recibido"){
+                arrayRecibido = arrayRecibido.concat(array[i]);
+                arrayRecibidoIds = arrayRecibidoIds.concat(arrayId[i]);
+              }else if(array[i].seguimientoActual.status == "En proceso"){
+                arrayEnProceso = arrayEnProceso.concat(array[i]);
+                arrayEnProcesoIds = arrayEnProcesoIds.concat(arrayId[i]);
+              }
+            }
             self.setState({
               mails: array,
               mailsIds: arrayId,
-              seguimiento: arraySeguimiento
+              seguimiento: arraySeguimiento,
+              completados: arrayCompletos,
+              completadosIds: arrayCompletosIds,
+              seguidos: arrayEnProceso,
+              seguidosIds: arrayEnProcesoIds,
+              recibidos: arrayRecibido,
+              recibidosIds: arrayRecibidoIds,
             })
           }
         )
   }
 
+  select = (index) => this.setState({selectedIndex: index});
+
   render(){
     return(
         <div>
-        <a onClick={() => firebaseAuth().signOut() } href="/admin">Salir</a>
+          <Paper zDepth={1}>
+            <BottomNavigation selectedIndex={this.state.selectedIndex}>
+              <BottomNavigationItem
+                label="TODOS"
+                icon={todos}
+                onClick={() => this.select(0)}
+              />
+              <BottomNavigationItem
+                label="RECIBIDO"
+                icon={recibido}
+                onClick={() => this.select(1)}
+              />
+              <BottomNavigationItem
+                label="COMPLETO"
+                icon={checked}
+                onClick={() => this.select(2)}
+              />
+              <BottomNavigationItem
+                label="EN PROCESO"
+                icon={proceso}
+                onClick={() => this.select(3)}
+              />
+              <BottomNavigationItem
+                label="SALIR"
+                icon={salir}
+                onClick={() => firebaseAuth().signOut()}
+              />
+            </BottomNavigation>
+          </Paper>
           <List>
-            <Items mails={this.state.mails} mailsIds={this.state.mailsIds} arraySeguimiento={this.state.seguimiento} />
+            <Items mails={this.state.mails}
+                   mailsIds={this.state.mailsIds}
+                   arraySeguimiento={this.state.seguimiento}
+                   selectedIndex={this.state.selectedIndex}
+                   arrayRecibido={this.state.recibidos}
+                   arrayRecibidoIds={this.state.recibidosIds}
+                   arrayEnProcesoIds={this.state.seguidosIds}
+                   arrayEnProceso={this.state.seguidos}
+                   arrayCompletos={this.state.completados}
+                   arrayCompletosIds={this.state.completadosIds}
+                    />
           </List>
         </div>
     );
