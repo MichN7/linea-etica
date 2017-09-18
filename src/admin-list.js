@@ -12,7 +12,7 @@ import * as firebase from 'firebase'
 import { ref, firebaseAuth } from './const.js'
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import './admin-list.css'
-
+import DropDownMenu from 'material-ui/DropDownMenu';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
@@ -44,22 +44,49 @@ const styleItem = {
 
 
 const Items = (props) =>{
-  let arrayActivo = props.mails;
-  let arrayActivoIds = props.mailsIds;
+  let arrayActivo = [];
+  let arrayActivoIds = [];
   if(props.selectedIndex == 0){
-   arrayActivo = props.mails;
-   arrayActivoIds = props.mailsIds;
+
+    for (var i = 0; i < props.mails.length; i++) {
+      var d = new Date(props.mails[i].diaActual);
+      var n = d.getMonth();
+      if (props.value ==n+1 ){
+      arrayActivo[i] = props.mails[i];
+      arrayActivoIds[i] = props.mailsIds[i];
+    }
+    }
  }
   else if(props.selectedIndex == 1){
-    arrayActivo = props.arrayRecibido;
-    arrayActivoIds = props.arrayRecibidoIds;
+    for (var i = 0; i < props.arrayRecibido.length; i++) {
+      var d = new Date(props.arrayRecibido[i].diaActual);
+      var n = d.getMonth();
+      if (props.value ==n+1 ){
+        arrayActivo[i] = props.arrayRecibido[i];
+        arrayActivoIds[i] = props.arrayRecibidoIds[i];
+    }
+    }
   }
   else if(props.selectedIndex == 2){
-    arrayActivo = props.arrayCompletos;
-    arrayActivoIds = props.arrayCompletosIds
+    for (var i = 0; i < props.arrayCompletos.length; i++) {
+      var d = new Date(props.arrayCompletos[i].diaActual);
+      var n = d.getMonth();
+      if (props.value ==n+1 ){
+        arrayActivo[i] = props.arrayCompletos[i];
+        arrayActivoIds[i] = props.arrayCompletosIds[i];
+    }
+    }
+
   }  else if(props.selectedIndex == 3){
-      arrayActivo = props.arrayEnProceso;
-      arrayActivoIds = props.arrayEnProcesoIds;
+    for (var i = 0; i < props.arrayEnProceso.length; i++) {
+      var d = new Date(props.arrayEnProceso[i].diaActual);
+      var n = d.getMonth();
+      if (props.value ==n+1 ){
+        arrayActivo = props.arrayEnProceso;
+        arrayActivoIds = props.arrayEnProcesoIds;
+    }
+    }
+
     }
   return(
     <div id='items'>
@@ -128,6 +155,7 @@ class ListaAdmin extends Component{
           recibidosIds:[],
           seguidos:[],
           seguidosIds:[],
+          value: 2,
         }
 
         var promise = new Promise(
@@ -176,7 +204,7 @@ class ListaAdmin extends Component{
   }
 
   select = (index) => this.setState({selectedIndex: index});
-
+  handleChange = (event, index, value) => this.setState({value});
   render(){
     return(
         <div>
@@ -209,6 +237,22 @@ class ListaAdmin extends Component{
               />
             </BottomNavigation>
           </Paper>
+          <DropDownMenu value={this.state.value} onChange={this.handleChange} openImmediately={true}>
+        <MenuItem value={1} primaryText="Enero" />
+        <MenuItem value={2} primaryText="Febrero" />
+        <MenuItem value={3} primaryText="Marzo" />
+        <MenuItem value={4} primaryText="Abril" />
+        <MenuItem value={5} primaryText="Mayo" />
+        <MenuItem value={6} primaryText="Junio" />
+        <MenuItem value={7} primaryText="Julio" />
+        <MenuItem value={8} primaryText="Agosto" />
+        <MenuItem value={9} primaryText="Septiembre" />
+        <MenuItem value={10} primaryText="Octubre" />
+        <MenuItem value={11} primaryText="Noviembre" />
+        <MenuItem value={12} primaryText="Diciembre" />
+
+
+      </DropDownMenu>
           <List>
             <Items mails={this.state.mails}
                    mailsIds={this.state.mailsIds}
@@ -220,6 +264,7 @@ class ListaAdmin extends Component{
                    arrayEnProceso={this.state.seguidos}
                    arrayCompletos={this.state.completados}
                    arrayCompletosIds={this.state.completadosIds}
+                   value={this.state.value}
                     />
           </List>
         </div>

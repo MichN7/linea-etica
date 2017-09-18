@@ -134,6 +134,8 @@ handleChangeNotas = (event) => {
 
            var refDB=ref.child("reportes/" +this.state.id);
            var refDBStatus=ref.child("reportes/"+ this.state.id+ "/seguimiento");
+           var refDBStatusActual=ref.child("reportes/"+ this.state.id+ "/seguimientoActual");
+
              refDB.set({
                nombre:`${this.state.nombre}`,
                caso:`${this.state.caso}`,
@@ -144,7 +146,13 @@ handleChangeNotas = (event) => {
                diaActual:today.getTime(),
                radio: `${this.state.radioVal}`,
               audio:false
-             }),
+            }),
+            refDBStatusActual.set({
+              notas: 'El reporte ha sido recibido pero aún no se ha revisado',
+              status: 'Recibido',
+              fecha: date,
+              audio:false
+            }),
              refDBStatus.push({
                notas: 'El reporte ha sido recibido pero aún no se ha revisado',
                status: 'Recibido',
