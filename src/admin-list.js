@@ -35,7 +35,7 @@ const todos = <MdAssignmentInd />
 
 const style ={
   lineHeight: '5px',
-  paddingBottom: '8px'
+  paddingBottom: '9px'
 }
 
 const styleItem = {
