@@ -1,0 +1,206 @@
+[debug] [2017-09-19T14:33:28.628Z] ----------------------------------------------------------------------
+[debug] [2017-09-19T14:33:28.639Z] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2017-09-19T14:33:28.640Z] CLI Version:  3.9.1
+[debug] [2017-09-19T14:33:28.640Z] Platform:     darwin
+[debug] [2017-09-19T14:33:28.640Z] Node Version: v6.10.0
+[debug] [2017-09-19T14:33:28.641Z] Time:         Tue Sep 19 2017 09:33:28 GMT-0500 (CDT)
+[debug] [2017-09-19T14:33:28.641Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-09-19T14:33:28.703Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-09-19T14:33:28.703Z] > authorizing via signed-in user
+[debug] [2017-09-19T14:33:28.706Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-09-19T14:33:28.706Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/0qL47GbEZf-OrqU-m8MWa0m8QO-NspeKLiYlsyIquP3csT8Q3_jHtEI4F2_am6Se',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Sep 19 2017 09:33:28 GMT-0500 (CDT)
+[debug] [2017-09-19T14:33:29.378Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-19T14:33:29.383Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/linea-etica  
+ Tue Sep 19 2017 09:33:29 GMT-0500 (CDT)
+[debug] [2017-09-19T14:33:30.101Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-19T14:33:30.102Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/linea-etica/tokens  
+ Tue Sep 19 2017 09:33:30 GMT-0500 (CDT)
+[debug] [2017-09-19T14:33:31.055Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'linea-etica'...
+[info] 
+[info] i  deploying database, hosting
+[info] ✔  database: rules ready to deploy.
+[info] i  hosting: preparing build directory for upload...
+[debug] [2017-09-19T14:33:35.368Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/linea-etica/uploads/-KuPYP9PQh_irxScljo8?fileCount=12&message=  
+ Tue Sep 19 2017 09:33:35 GMT-0500 (CDT)
+[debug] [2017-09-19T14:36:09.190Z] <<< HTTP RESPONSE 409
+[debug] [2017-09-19T14:36:09.191Z] <<< HTTP RESPONSE BODY undefined
+[debug] [2017-09-19T14:36:09.193Z] TypeError: Cannot read property 'error' of undefined
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2017-09-19T14:38:44.699Z] ----------------------------------------------------------------------
+[debug] [2017-09-19T14:38:44.705Z] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2017-09-19T14:38:44.706Z] CLI Version:  3.9.1
+[debug] [2017-09-19T14:38:44.706Z] Platform:     darwin
+[debug] [2017-09-19T14:38:44.706Z] Node Version: v6.10.0
+[debug] [2017-09-19T14:38:44.707Z] Time:         Tue Sep 19 2017 09:38:44 GMT-0500 (CDT)
+[debug] [2017-09-19T14:38:44.707Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-09-19T14:38:44.725Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-09-19T14:38:44.725Z] > authorizing via signed-in user
+[debug] [2017-09-19T14:38:44.728Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/linea-etica  
+ Tue Sep 19 2017 09:38:44 GMT-0500 (CDT)
+[debug] [2017-09-19T14:38:45.476Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-19T14:38:45.478Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/linea-etica/tokens  
+ Tue Sep 19 2017 09:38:45 GMT-0500 (CDT)
+[debug] [2017-09-19T14:38:46.016Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'linea-etica'...
+[info] 
+[info] i  deploying database, hosting
+[info] ✔  database: rules ready to deploy.
+[info] i  hosting: preparing build directory for upload...
+[debug] [2017-09-19T14:38:48.911Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/linea-etica/uploads/-KuPZamNHckNEHtAsii5?fileCount=12&message=  
+ Tue Sep 19 2017 09:38:48 GMT-0500 (CDT)
+[debug] [2017-09-19T14:39:38.065Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-19T14:39:38.066Z] [hosting] .tgz uploaded successfully, waiting for extraction
+[error] 
+[error] Error: File upload failed: Deploy failed.
+[debug] [2017-09-19T14:40:32.985Z] Error Context: {
+  "duration": 62760,
+  "fileCount": 12,
+  "ip": "187.247.3.33",
+  "start": 1505831883185,
+  "status": "failed",
+  "statusMessage": "Deploy failed.",
+  "uid": "115646631980381183726",
+  "uploadedCount": 12,
+  "user": {
+    "email": "emmanuelskapple@gmail.com",
+    "gaiaId": "115646631980381183726",
+    "image": "https://lh3.googleusercontent.com/-3z_Adp-DNj8/AAAAAAAAAAI/AAAAAAAAADg/sGsdT4WcxhA/photo.jpg"
+  }
+}
+[debug] [2017-09-19T14:40:52.894Z] ----------------------------------------------------------------------
+[debug] [2017-09-19T14:40:52.900Z] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy --debug
+[debug] [2017-09-19T14:40:52.903Z] CLI Version:  3.9.1
+[debug] [2017-09-19T14:40:52.903Z] Platform:     darwin
+[debug] [2017-09-19T14:40:52.903Z] Node Version: v6.10.0
+[debug] [2017-09-19T14:40:52.904Z] Time:         Tue Sep 19 2017 09:40:52 GMT-0500 (CDT)
+[debug] [2017-09-19T14:40:52.904Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-09-19T14:40:52.924Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-09-19T14:40:52.925Z] > authorizing via signed-in user
+[debug] [2017-09-19T14:40:52.928Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/linea-etica  
+ Tue Sep 19 2017 09:40:52 GMT-0500 (CDT)
+[debug] [2017-09-19T14:40:53.478Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-19T14:40:53.481Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/linea-etica/tokens  
+ Tue Sep 19 2017 09:40:53 GMT-0500 (CDT)
+[debug] [2017-09-19T14:40:54.013Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'linea-etica'...
+[info] 
+[info] i  deploying database, hosting
+[info] ✔  database: rules ready to deploy.
+[info] i  hosting: preparing build directory for upload...
+[debug] [2017-09-19T14:40:56.655Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/linea-etica/uploads/-KuP_5-b4n0_8roCOBnw?fileCount=12&message=  
+ Tue Sep 19 2017 09:40:56 GMT-0500 (CDT)
+[debug] [2017-09-19T14:41:39.907Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-19T14:41:39.908Z] [hosting] .tgz uploaded successfully, waiting for extraction
+[info] ✔  hosting: 12 files uploaded successfully
+[info] i  starting release process (may take several minutes)...
+[debug] [2017-09-19T14:41:49.653Z] >>> HTTP REQUEST POST https://deploy.firebase.com/v1/projects/linea-etica/releases { database: { rulesString: '{\n  "rules": {\n    ".read": "true",\n    ".write": "true"\n  }\n}\n' },
+  hosting: 
+   { public: 'build',
+     rewrites: [ [Object] ],
+     version: '-KuP_5-b4n0_8roCOBnw',
+     prefix: '-KuP_5-b4n0_8roCOBnw/',
+     manifest: [] } } 
+ Tue Sep 19 2017 09:41:49 GMT-0500 (CDT)
+[debug] [2017-09-19T14:41:50.707Z] <<< HTTP RESPONSE 200
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/linea-etica/overview
+[info] Hosting URL: https://linea-etica.firebaseapp.com
+[debug] [2017-09-19T14:47:25.204Z] ----------------------------------------------------------------------
+[debug] [2017-09-19T14:47:25.211Z] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy --debug
+[debug] [2017-09-19T14:47:25.213Z] CLI Version:  3.9.1
+[debug] [2017-09-19T14:47:25.213Z] Platform:     darwin
+[debug] [2017-09-19T14:47:25.213Z] Node Version: v6.10.0
+[debug] [2017-09-19T14:47:25.214Z] Time:         Tue Sep 19 2017 09:47:25 GMT-0500 (CDT)
+[debug] [2017-09-19T14:47:25.214Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-09-19T14:47:25.233Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-09-19T14:47:25.234Z] > authorizing via signed-in user
+[debug] [2017-09-19T14:47:25.238Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/linea-etica  
+ Tue Sep 19 2017 09:47:25 GMT-0500 (CDT)
+[debug] [2017-09-19T14:47:25.999Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-19T14:47:26.001Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/linea-etica/tokens  
+ Tue Sep 19 2017 09:47:26 GMT-0500 (CDT)
+[debug] [2017-09-19T14:47:26.649Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'linea-etica'...
+[info] 
+[info] i  deploying database, hosting
+[info] ✔  database: rules ready to deploy.
+[info] i  hosting: preparing build directory for upload...
+[debug] [2017-09-19T14:47:29.364Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/linea-etica/uploads/-KuPa_svbr_B-cDVkLPA?fileCount=12&message=  
+ Tue Sep 19 2017 09:47:29 GMT-0500 (CDT)
+[debug] [2017-09-19T14:48:10.784Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-19T14:48:10.786Z] [hosting] .tgz uploaded successfully, waiting for extraction
+[info] ✔  hosting: 12 files uploaded successfully
+[info] i  starting release process (may take several minutes)...
+[debug] [2017-09-19T14:48:57.077Z] >>> HTTP REQUEST POST https://deploy.firebase.com/v1/projects/linea-etica/releases { database: { rulesString: '{\n  "rules": {\n    ".read": "true",\n    ".write": "true"\n  }\n}\n' },
+  hosting: 
+   { public: 'build',
+     rewrites: [ [Object] ],
+     version: '-KuPa_svbr_B-cDVkLPA',
+     prefix: '-KuPa_svbr_B-cDVkLPA/',
+     manifest: [] } } 
+ Tue Sep 19 2017 09:48:57 GMT-0500 (CDT)
+[debug] [2017-09-19T14:48:58.098Z] <<< HTTP RESPONSE 200
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/linea-etica/overview
+[info] Hosting URL: https://linea-etica.firebaseapp.com
+[debug] [2017-09-19T14:59:02.272Z] ----------------------------------------------------------------------
+[debug] [2017-09-19T14:59:02.277Z] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy --debug
+[debug] [2017-09-19T14:59:02.279Z] CLI Version:  3.9.1
+[debug] [2017-09-19T14:59:02.279Z] Platform:     darwin
+[debug] [2017-09-19T14:59:02.279Z] Node Version: v6.10.0
+[debug] [2017-09-19T14:59:02.280Z] Time:         Tue Sep 19 2017 09:59:02 GMT-0500 (CDT)
+[debug] [2017-09-19T14:59:02.280Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-09-19T14:59:02.337Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-09-19T14:59:02.337Z] > authorizing via signed-in user
+[debug] [2017-09-19T14:59:02.340Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/linea-etica  
+ Tue Sep 19 2017 09:59:02 GMT-0500 (CDT)
+[debug] [2017-09-19T14:59:03.076Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-19T14:59:03.078Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/linea-etica/tokens  
+ Tue Sep 19 2017 09:59:03 GMT-0500 (CDT)
+[debug] [2017-09-19T14:59:03.681Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'linea-etica'...
+[info] 
+[info] i  deploying database, hosting
+[info] ✔  database: rules ready to deploy.
+[info] i  hosting: preparing build directory for upload...
+[debug] [2017-09-19T14:59:06.584Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/linea-etica/uploads/-KuPdF3csKyqBFtPCN8m?fileCount=12&message=  
+ Tue Sep 19 2017 09:59:06 GMT-0500 (CDT)
+[debug] [2017-09-19T14:59:49.379Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-19T14:59:49.381Z] [hosting] .tgz uploaded successfully, waiting for extraction
+[info] ✔  hosting: 12 files uploaded successfully
+[info] i  starting release process (may take several minutes)...
+[debug] [2017-09-19T15:01:00.143Z] >>> HTTP REQUEST POST https://deploy.firebase.com/v1/projects/linea-etica/releases { database: { rulesString: '{\n  "rules": {\n    ".read": "true",\n    ".write": "true"\n  }\n}\n' },
+  hosting: 
+   { public: 'build',
+     rewrites: [ [Object] ],
+     version: '-KuPdF3csKyqBFtPCN8m',
+     prefix: '-KuPdF3csKyqBFtPCN8m/',
+     manifest: [] } } 
+ Tue Sep 19 2017 10:01:00 GMT-0500 (CDT)
+[debug] [2017-09-19T15:01:01.043Z] <<< HTTP RESPONSE 200
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/linea-etica/overview
+[info] Hosting URL: https://linea-etica.firebaseapp.com

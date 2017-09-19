@@ -41,7 +41,7 @@ const Carta = (props) =>{
               {audio === true ?
                 <div>
                   <p>Haga click en el botón de play para reproducir</p>
-                  <p>Status: {props.idData[4].status}</p>
+                  <p>Status: {props.idData[5].status}</p>
                 </div>
                 : " "
               }

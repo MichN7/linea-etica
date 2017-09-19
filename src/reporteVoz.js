@@ -29,11 +29,14 @@ class ReporteVoz extends Component{
   constructor(props){
     super(props);
     var idReporte=id.generate();
+
+
     this.state = {
       id: idReporte,
       record: false,
       blobObject: null,
       isRecording: false,
+      diaTT:[],
     }
   }
 
@@ -93,7 +96,7 @@ class ReporteVoz extends Component{
       })//end promise
       promise.then(
         function(url){
-          let today = new Date,
+          var today = new Date,
           date = ("0" + today.getDate()).slice(-2) + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + today.getFullYear();
           var refDB=ref.child("reportes/" +`${self.state.id}`);
           var refDBStatus=ref.child("reportes/"+ `${self.state.id}` + "/seguimiento");
@@ -101,7 +104,8 @@ class ReporteVoz extends Component{
           refDB.set({
             audioURL:url,
             audio:true,
-            diaActual: date
+            diaActual: today.getTime(),
+            diaActualT:date,
           }),
           refDBStatus.push({
             notas: 'El reporte ha sido recibido pero aún no se ha revisado',
