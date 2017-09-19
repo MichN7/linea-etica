@@ -12,12 +12,12 @@ const Carta = (props) =>{
   let audio = props.idData[0];
   let caso = props.idData[1];
   let dia = props.idData[2];
-  let diaActual = props.idData[3];
-  let hora = props.idData[4];
-  let lugar = props.idData[5];
-  let nombre = props.idData[6];
-  let personaInvolucrada = props.idData[7];
-  let radio = props.idData[8];
+  let diaActual = props.idData[4];
+  let hora = props.idData[5];
+  let lugar = props.idData[6];
+  let nombre = props.idData[7];
+  let personaInvolucrada = props.idData[8];
+  let radio = props.idData[9];
   let id = props.id;
 
   return(
@@ -29,6 +29,7 @@ const Carta = (props) =>{
             <div>
               {audio === false ?
                 <div>
+                <p><strong>El reporte se realizo el día:</strong> {diaActual}</p>
                   <p><strong>Sucedió el día:</strong> {dia}</p>
                   <p><strong>Sucedió a las:</strong> {hora}</p>
                   <p><strong>Sucedió en:</strong> {lugar}</p>

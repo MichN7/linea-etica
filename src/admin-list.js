@@ -97,7 +97,7 @@ const Items = (props) =>{
             state: { id: arrayActivoIds[i]}
           }}>
           <Subheader>
-            <strong> Fecha de envío: </strong> { arrayActivo[i].diaActual }
+            <strong> Fecha de envío: </strong> { arrayActivo[i].diaActualT }
           </Subheader>
           <Subheader style={style}>
             <strong> Status: </strong>
@@ -143,6 +143,8 @@ class ListaAdmin extends Component{
         var idRef = ref.child("reportes/");
         var seguimientoRef = idRef.child("seguimientoActual/")
         let self = this;
+        var d = new Date();
+
         this.state={
           date:date,
           mails: [],
@@ -155,7 +157,7 @@ class ListaAdmin extends Component{
           recibidosIds:[],
           seguidos:[],
           seguidosIds:[],
-          value: 2,
+          value: d.getMonth()+1,
         }
 
         var promise = new Promise(

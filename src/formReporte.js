@@ -30,6 +30,8 @@ class Reporte extends Component {
     dataHora:[],
     radioVal: null,
     nombre: [],
+    dia:[],
+    DiaTT:new Date(),
 
  };
 
@@ -95,15 +97,15 @@ handleChangeNotas = (event) => {
      caso:event.target.value
    });
 
- }
-   setFechaDesde(x,event){
-     var fecha=JSON.stringify(event);
-    var fechaFormat=fecha.substring(1,11);
-        this.setState({
-          dia:fechaFormat
-        })
-    }
+ };
+ handleUpdateInputFecha = (value) => {
 
+   this.setState({
+     dia: [
+       value
+     ]
+   });
+ };
    getValue = (e) =>{
      let value = e.target.value;
      if(value === "Sí"){
@@ -125,6 +127,7 @@ handleChangeNotas = (event) => {
    submit = () => {
      let today = new Date,
      date = today.getDate()+ '-' + '0'+(today.getMonth() + 1) + '-' + today.getFullYear() ;
+
      confirmAlert({
        title: 'Linea-Etica',                        // Title dialog
        message:  "¿Está seguro que desea enviar el reporte? ",               // Message dialog
@@ -137,7 +140,8 @@ handleChangeNotas = (event) => {
            var refDBStatusActual=ref.child("reportes/"+ this.state.id+ "/seguimientoActual");
 
              refDB.set({
-               nombre:`${this.state.nombre}`,
+               diaActualT:`${this.state.DiaTT}`,
+               nombre:`${this.state.dataNombre}`,
                caso:`${this.state.caso}`,
                lugar:`${this.state.dataLugar}`,
                personaInvolucrada:`${this.state.dataPersonas}`,
@@ -222,9 +226,12 @@ handleChangeNotas = (event) => {
               onUpdateInput={this.handleUpdateInputHora}
           />
             <p>¿En qué día?</p>
-            <DatePicker container="inline"
-              onChange={(x, event) => this.setFechaDesde(x,event)}
-             />
+            <AutoComplete
+
+                dataSource={this.state.dia}
+                type="date"
+                onUpdateInput={this.handleUpdateInputFecha}
+            />
           <p>¿Quiénes fueron las personas involucradas? (Nombre, aréa, puesto)?</p>
           <AutoComplete
             hintText="Ex. Licenciado Alberto Diaz"
